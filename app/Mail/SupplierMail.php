@@ -30,7 +30,7 @@ class SupplierMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Supplier Mail',
+            subject: 'Погрузка',
         );
     }
 

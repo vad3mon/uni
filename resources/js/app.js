@@ -1,144 +1,17 @@
-import './bootstrap';
-import "@univerjs/design/lib/index.css";
-import "@univerjs/ui/lib/index.css";
-import "@univerjs/docs-ui/lib/index.css";
-import "@univerjs/sheets-ui/lib/index.css";
-import "@univerjs/sheets-formula/lib/index.css";
-import '@univerjs/sheets-numfmt/lib/index.css';
-import '@univerjs/find-replace/lib/index.css';
+import { setupUniver } from './components/setup-univer.js';
 
-import '../css/app.css';
+function main() {
+    const univerAPI = setupUniver()
+    window.univerAPI = univerAPI
+}
 
-import {LocaleType, Tools, Univer, UniverInstanceType} from "@univerjs/core";
-import { defaultTheme, Dropdown } from "@univerjs/design";
-
-import { UniverDocsPlugin } from "@univerjs/docs";
-import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
-
-import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
-import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
-
-import { UniverSheetsPlugin } from "@univerjs/sheets";
-import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
-import {UniverSheetsNumfmtPlugin} from "@univerjs/sheets-numfmt";
-import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
-
-import { UniverUIPlugin } from "@univerjs/ui";
-
-import { FUniver } from '@univerjs/facade'
-
-// import DesignEnUS from '@univerjs/design/locale/en-US';
-// import UIEnUS from '@univerjs/ui/locale/en-US';
-// import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
-// import SheetsEnUS from '@univerjs/sheets/locale/en-US';
-// import SheetsUIEnUS from '@univerjs/sheets-ui/locale/en-US';
-// import SheetsFormulaEnUS from '@univerjs/sheets-formula/locale/en-US';
-
-import DesignRU from '@univerjs/design/locale/ru-RU';
-import UIRU from '@univerjs/ui/locale/ru-RU';
-import DocsUIRU from '@univerjs/docs-ui/locale/ru-RU';
-import SheetsRU from '@univerjs/sheets/locale/ru-RU';
-import SheetsUIRU from '@univerjs/sheets-ui/locale/ru-RU';
-import SheetsFormulaRU from '@univerjs/sheets-formula/locale/ru-RU';
-import NumfmtRU from '@univerjs/sheets-numfmt/lib/locale/ru-RU';
-
-// import { ruRU } from 'univer:locales'
-// import { ruRU } from '@univerjs/vite-plugin/types'
-import {UniverFindReplacePlugin} from "@univerjs/find-replace";
-import {UniverSheetsFindReplacePlugin} from "@univerjs/sheets-find-replace";
-import SheetsFindReplaceRU from '@univerjs/sheets-find-replace/locale/ru-RU';
-
-
-
-const univer = new Univer({
-    theme: defaultTheme,
-    locale: LocaleType.EN_US,
-    locales:
-        {
-
-        [LocaleType.EN_US]: Tools.deepMerge(
-            SheetsRU,
-            DocsUIRU,
-            SheetsUIRU,
-            SheetsFormulaRU,
-            UIRU,
-            DesignRU,
-            NumfmtRU,
-            SheetsFindReplaceRU
-        ),
-    },
-});
-
-univer.registerPlugin(UniverRenderEnginePlugin);
-univer.registerPlugin(UniverFormulaEnginePlugin);
-
-univer.registerPlugin(UniverUIPlugin, {
-    container: 'univer',
-    header: true,
-    footer: true,
-});
-
-univer.registerPlugin(UniverDocsPlugin);
-univer.registerPlugin(UniverDocsUIPlugin);
-
-univer.registerPlugin(UniverSheetsPlugin);
-univer.registerPlugin(UniverSheetsUIPlugin);
-univer.registerPlugin(UniverSheetsFormulaPlugin);
-
-univer.registerPlugin(UniverFindReplacePlugin)
-univer.registerPlugin(UniverSheetsFindReplacePlugin)
-
-univer.registerPlugin(UniverSheetsNumfmtPlugin)
-
-// Подключаем прослушивание событий изменения ячеек
-
-window.univerAPI = FUniver.newAPI(univer);
-
-
-let wb;
-// wb = univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
-// console.log(w);
-
-// wb = univer.createUnit(UniverInstanceType.UNIVER_SHEET, {
-//     "id":"6dmMGDzBrl9rHZ-a29_bW", "name":"shettus", "rowCount":1000, "columnCount":20, "freeze":{"xSplit":0,"ySplit":0,"startRow":-1,"startColumn":-1}, "hidden":0, "rowData":{"0":{"h":34,"ah":24},"1":{"h":34},"2":{"h":37},"3":{"h":29},"4":{"h":39},"5":{"h":40,"ah":24},"6":{"h":40},"7":{"h":37},"8":{"h":42},"9":{"h":44},"10":{"h":37},"11":{"h":37},"12":{"h":37},"13":{"h":37},"14":{"h":37},"15":{"h":37},"16":{"h":37},"17":{"h":37},"18":{"h":54},"19":{"h":37},"20":{"h":43},"21":{"h":37},"22":{"h":37},"23":{"h":61},"24":{"h":66},"25":{"h":36},"26":{"h":46},"27":{"h":41},"28":{"h":40},"29":{"h":36},"30":{"h":42},"31":{"h":37},"32":{"h":40},"33":{"h":40},"34":{"h":40},"35":{"h":35},"36":{"h":35},"37":{"h":35},"38":{"h":35},"39":{"h":35},"40":{"h":41},"41":{"h":41},"42":{"h":41},"43":{"h":41},"44":{"h":41},"45":{"h":41},"46":{"h":41},"47":{"h":43},"48":{"h":84},"49":{"h":36},"50":{"h":48},"51":{"h":28},"52":{"h":43},"53":{"h":29},"54":{"h":42},"55":{"h":40},"56":{"h":30},"57":{"h":70},"58":{"h":40},"59":{"h":40},"60":{"h":40},"61":{"h":40},"62":{"h":42},"63":{"h":38},"64":{"h":38},"65":{"h":38},"66":{"h":38},"67":{"h":47},"68":{"h":38},"69":{"h":38},"70":{"h":38},"71":{"h":34},"72":{"h":68},"73":{"h":36},"74":{"h":37},"75":{"h":40},"76":{"h":40},"77":{"h":41},"78":{"h":40},"79":{"h":46},"80":{"h":38},"81":{"h":38},"82":{"h":36},"83":{"h":52},"84":{"h":28},"85":{"h":28},"86":{"h":52},"87":{"h":34},"88":{"h":38},"89":{"h":38},"90":{"h":44},"91":{"h":46},"92":{"h":46},"93":{"h":34},"94":{"h":42},"95":{"h":42},"96":{"h":62},"97":{"h":36},"98":{"h":42},"99":{"h":38},"100":{"h":40},"101":{"h":42},"102":{"h":38},"103":{"h":43},"104":{"h":44},"105":{"h":42},"106":{"h":36},"107":{"h":50},"108":{"h":39},"109":{"h":39},"110":{"h":39},"111":{"h":39},"112":{"h":39},"113":{"h":39},"114":{"h":39},"115":{"h":39},"116":{"h":39},"117":{"h":39},"118":{"h":39},"119":{"h":40},"120":{"h":76},"121":{"h":25},"122":{"h":45},"123":{"h":44},"124":{"h":42},"125":{"h":31},"126":{"h":39},"127":{"h":48},"128":{"h":46},"129":{"h":46},"130":{"h":46},"131":{"h":46},"132":{"h":46},"133":{"h":46},"134":{"h":46},"135":{"h":46},"136":{"h":46},"137":{"h":41},"138":{"h":41},"139":{"h":41},"140":{"h":41},"141":{"h":41},"142":{"h":67},"143":{"h":25},"144":{"h":60}},"tabColor":"","mergeData":[{"endRow":0,"startRow":0,"endColumn":2,"startColumn":0},{"endRow":0,"startRow":0,"endColumn":5,"startColumn":3},{"endRow":2,"startRow":1,"endColumn":0,"startColumn":0},{"endRow":2,"startRow":1,"endColumn":1,"startColumn":1},{"endRow":2,"startRow":1,"endColumn":3,"startColumn":3},{"endRow":2,"startRow":1,"endColumn":4,"startColumn":4},{"endRow":4,"startRow":3,"endColumn":0,"startColumn":0},{"endRow":4,"startRow":3,"endColumn":1,"startColumn":1},{"endRow":4,"startRow":3,"endColumn":3,"startColumn":3},{"endRow":4,"startRow":3,"endColumn":4,"startColumn":4},{"endRow":6,"startRow":5,"endColumn":0,"startColumn":0},{"endRow":6,"startRow":5,"endColumn":1,"startColumn":1},{"endRow":6,"startRow":5,"endColumn":3,"startColumn":3},{"endRow":6,"startRow":5,"endColumn":4,"startColumn":4},{"endRow":8,"startRow":7,"endColumn":0,"startColumn":0},{"endRow":8,"startRow":7,"endColumn":1,"startColumn":1},{"endRow":8,"startRow":7,"endColumn":3,"startColumn":3},{"endRow":8,"startRow":7,"endColumn":4,"startColumn":4},{"endRow":10,"startRow":9,"endColumn":0,"startColumn":0},{"endRow":10,"startRow":9,"endColumn":1,"startColumn":1},{"endRow":10,"startRow":9,"endColumn":3,"startColumn":3},{"endRow":10,"startRow":9,"endColumn":4,"startColumn":4},{"endRow":12,"startRow":11,"endColumn":0,"startColumn":0},{"endRow":12,"startRow":11,"endColumn":1,"startColumn":1},{"endRow":12,"startRow":11,"endColumn":3,"startColumn":3},{"endRow":12,"startRow":11,"endColumn":4,"startColumn":4},{"endRow":14,"startRow":13,"endColumn":0,"startColumn":0},{"endRow":14,"startRow":13,"endColumn":1,"startColumn":1},{"endRow":14,"startRow":13,"endColumn":3,"startColumn":3},{"endRow":14,"startRow":13,"endColumn":4,"startColumn":4},{"endRow":16,"startRow":15,"endColumn":0,"startColumn":0},{"endRow":16,"startRow":15,"endColumn":1,"startColumn":1},{"endRow":16,"startRow":15,"endColumn":3,"startColumn":3},{"endRow":16,"startRow":15,"endColumn":4,"startColumn":4},{"endRow":18,"startRow":17,"endColumn":0,"startColumn":0},{"endRow":18,"startRow":17,"endColumn":1,"startColumn":1},{"endRow":18,"startRow":17,"endColumn":3,"startColumn":3},{"endRow":18,"startRow":17,"endColumn":4,"startColumn":4},{"endRow":20,"startRow":19,"endColumn":0,"startColumn":0},{"endRow":20,"startRow":19,"endColumn":1,"startColumn":1},{"endRow":20,"startRow":19,"endColumn":3,"startColumn":3},{"endRow":20,"startRow":19,"endColumn":4,"startColumn":4},{"endRow":22,"startRow":21,"endColumn":0,"startColumn":0},{"endRow":22,"startRow":21,"endColumn":1,"startColumn":1},{"endRow":22,"startRow":21,"endColumn":3,"startColumn":3},{"endRow":22,"startRow":21,"endColumn":4,"startColumn":4},{"endRow":25,"startRow":25,"endColumn":2,"startColumn":0},{"endRow":25,"startRow":25,"endColumn":5,"startColumn":3},{"endRow":27,"startRow":26,"endColumn":0,"startColumn":0},{"endRow":27,"startRow":26,"endColumn":1,"startColumn":1},{"endRow":27,"startRow":26,"endColumn":3,"startColumn":3},{"endRow":27,"startRow":26,"endColumn":4,"startColumn":4},{"endRow":29,"startRow":28,"endColumn":0,"startColumn":0},{"endRow":29,"startRow":28,"endColumn":1,"startColumn":1},{"endRow":29,"startRow":28,"endColumn":3,"startColumn":3},{"endRow":29,"startRow":28,"endColumn":4,"startColumn":4},{"endRow":31,"startRow":30,"endColumn":0,"startColumn":0},{"endRow":31,"startRow":30,"endColumn":1,"startColumn":1},{"endRow":31,"startRow":30,"endColumn":3,"startColumn":3},{"endRow":31,"startRow":30,"endColumn":4,"startColumn":4},{"endRow":33,"startRow":32,"endColumn":0,"startColumn":0},{"endRow":33,"startRow":32,"endColumn":1,"startColumn":1},{"endRow":33,"startRow":32,"endColumn":3,"startColumn":3},{"endRow":33,"startRow":32,"endColumn":4,"startColumn":4},{"endRow":35,"startRow":34,"endColumn":0,"startColumn":0},{"endRow":35,"startRow":34,"endColumn":1,"startColumn":1},{"endRow":35,"startRow":34,"endColumn":3,"startColumn":3},{"endRow":35,"startRow":34,"endColumn":4,"startColumn":4},{"endRow":37,"startRow":36,"endColumn":0,"startColumn":0},{"endRow":37,"startRow":36,"endColumn":1,"startColumn":1},{"endRow":37,"startRow":36,"endColumn":3,"startColumn":3},{"endRow":37,"startRow":36,"endColumn":4,"startColumn":4},{"endRow":39,"startRow":38,"endColumn":0,"startColumn":0},{"endRow":39,"startRow":38,"endColumn":1,"startColumn":1},{"endRow":39,"startRow":38,"endColumn":3,"startColumn":3},{"endRow":39,"startRow":38,"endColumn":4,"startColumn":4},{"endRow":41,"startRow":40,"endColumn":0,"startColumn":0},{"endRow":41,"startRow":40,"endColumn":1,"startColumn":1},{"endRow":41,"startRow":40,"endColumn":3,"startColumn":3},{"endRow":41,"startRow":40,"endColumn":4,"startColumn":4},{"endRow":43,"startRow":42,"endColumn":0,"startColumn":0},{"endRow":43,"startRow":42,"endColumn":1,"startColumn":1},{"endRow":43,"startRow":42,"endColumn":3,"startColumn":3},{"endRow":43,"startRow":42,"endColumn":4,"startColumn":4},{"endRow":45,"startRow":44,"endColumn":0,"startColumn":0},{"endRow":45,"startRow":44,"endColumn":1,"startColumn":1},{"endRow":45,"startRow":44,"endColumn":3,"startColumn":3},{"endRow":45,"startRow":44,"endColumn":4,"startColumn":4},{"endRow":47,"startRow":46,"endColumn":0,"startColumn":0},{"endRow":47,"startRow":46,"endColumn":1,"startColumn":1},{"endRow":47,"startRow":46,"endColumn":3,"startColumn":3},{"endRow":47,"startRow":46,"endColumn":4,"startColumn":4},{"endRow":49,"startRow":49,"endColumn":2,"startColumn":0},{"endRow":49,"startRow":49,"endColumn":5,"startColumn":3},{"endRow":51,"startRow":50,"endColumn":0,"startColumn":0},{"endRow":51,"startRow":50,"endColumn":1,"startColumn":1},{"endRow":51,"startRow":50,"endColumn":3,"startColumn":3},{"endRow":51,"startRow":50,"endColumn":4,"startColumn":4},{"endRow":53,"startRow":52,"endColumn":0,"startColumn":0},{"endRow":53,"startRow":52,"endColumn":1,"startColumn":1},{"endRow":53,"startRow":52,"endColumn":3,"startColumn":3},{"endRow":53,"startRow":52,"endColumn":4,"startColumn":4},{"endRow":55,"startRow":54,"endColumn":0,"startColumn":0},{"endRow":55,"startRow":54,"endColumn":1,"startColumn":1},{"endRow":55,"startRow":54,"endColumn":3,"startColumn":3},{"endRow":55,"startRow":54,"endColumn":4,"startColumn":4},{"endRow":57,"startRow":56,"endColumn":0,"startColumn":0},{"endRow":57,"startRow":56,"endColumn":1,"startColumn":1},{"endRow":57,"startRow":56,"endColumn":3,"startColumn":3},{"endRow":57,"startRow":56,"endColumn":4,"startColumn":4},{"endRow":59,"startRow":58,"endColumn":0,"startColumn":0},{"endRow":59,"startRow":58,"endColumn":1,"startColumn":1},{"endRow":59,"startRow":58,"endColumn":3,"startColumn":3},{"endRow":59,"startRow":58,"endColumn":4,"startColumn":4},{"endRow":61,"startRow":60,"endColumn":0,"startColumn":0},{"endRow":61,"startRow":60,"endColumn":1,"startColumn":1},{"endRow":61,"startRow":60,"endColumn":3,"startColumn":3},{"endRow":61,"startRow":60,"endColumn":4,"startColumn":4},{"endRow":63,"startRow":62,"endColumn":0,"startColumn":0},{"endRow":63,"startRow":62,"endColumn":1,"startColumn":1},{"endRow":63,"startRow":62,"endColumn":3,"startColumn":3},{"endRow":63,"startRow":62,"endColumn":4,"startColumn":4},{"endRow":65,"startRow":64,"endColumn":0,"startColumn":0},{"endRow":65,"startRow":64,"endColumn":1,"startColumn":1},{"endRow":65,"startRow":64,"endColumn":3,"startColumn":3},{"endRow":65,"startRow":64,"endColumn":4,"startColumn":4},{"endRow":67,"startRow":66,"endColumn":0,"startColumn":0},{"endRow":67,"startRow":66,"endColumn":1,"startColumn":1},{"endRow":67,"startRow":66,"endColumn":3,"startColumn":3},{"endRow":67,"startRow":66,"endColumn":4,"startColumn":4},{"endRow":69,"startRow":68,"endColumn":0,"startColumn":0},{"endRow":69,"startRow":68,"endColumn":1,"startColumn":1},{"endRow":69,"startRow":68,"endColumn":3,"startColumn":3},{"endRow":69,"startRow":68,"endColumn":4,"startColumn":4},{"endRow":71,"startRow":70,"endColumn":0,"startColumn":0},{"endRow":71,"startRow":70,"endColumn":1,"startColumn":1},{"endRow":71,"startRow":70,"endColumn":3,"startColumn":3},{"endRow":71,"startRow":70,"endColumn":4,"startColumn":4},{"endRow":73,"startRow":73,"endColumn":2,"startColumn":0},{"endRow":73,"startRow":73,"endColumn":5,"startColumn":3},{"endRow":75,"startRow":74,"endColumn":0,"startColumn":0},{"endRow":75,"startRow":74,"endColumn":1,"startColumn":1},{"endRow":75,"startRow":74,"endColumn":3,"startColumn":3},{"endRow":75,"startRow":74,"endColumn":4,"startColumn":4},{"endRow":77,"startRow":76,"endColumn":0,"startColumn":0},{"endRow":77,"startRow":76,"endColumn":1,"startColumn":1},{"endRow":77,"startRow":76,"endColumn":3,"startColumn":3},{"endRow":77,"startRow":76,"endColumn":4,"startColumn":4},{"endRow":79,"startRow":78,"endColumn":0,"startColumn":0},{"endRow":79,"startRow":78,"endColumn":1,"startColumn":1},{"endRow":79,"startRow":78,"endColumn":3,"startColumn":3},{"endRow":79,"startRow":78,"endColumn":4,"startColumn":4},{"endRow":81,"startRow":80,"endColumn":0,"startColumn":0},{"endRow":81,"startRow":80,"endColumn":1,"startColumn":1},{"endRow":81,"startRow":80,"endColumn":3,"startColumn":3},{"endRow":81,"startRow":80,"endColumn":4,"startColumn":4},{"endRow":83,"startRow":82,"endColumn":0,"startColumn":0},{"endRow":83,"startRow":82,"endColumn":1,"startColumn":1},{"endRow":83,"startRow":82,"endColumn":3,"startColumn":3},{"endRow":83,"startRow":82,"endColumn":4,"startColumn":4},{"endRow":85,"startRow":84,"endColumn":0,"startColumn":0},{"endRow":85,"startRow":84,"endColumn":1,"startColumn":1},{"endRow":85,"startRow":84,"endColumn":3,"startColumn":3},{"endRow":85,"startRow":84,"endColumn":4,"startColumn":4},{"endRow":87,"startRow":86,"endColumn":0,"startColumn":0},{"endRow":87,"startRow":86,"endColumn":1,"startColumn":1},{"endRow":87,"startRow":86,"endColumn":3,"startColumn":3},{"endRow":87,"startRow":86,"endColumn":4,"startColumn":4},{"endRow":89,"startRow":88,"endColumn":0,"startColumn":0},{"endRow":89,"startRow":88,"endColumn":1,"startColumn":1},{"endRow":89,"startRow":88,"endColumn":3,"startColumn":3},{"endRow":89,"startRow":88,"endColumn":4,"startColumn":4},{"endRow":91,"startRow":90,"endColumn":0,"startColumn":0},{"endRow":91,"startRow":90,"endColumn":1,"startColumn":1},{"endRow":91,"startRow":90,"endColumn":3,"startColumn":3},{"endRow":91,"startRow":90,"endColumn":4,"startColumn":4},{"endRow":93,"startRow":92,"endColumn":0,"startColumn":0},{"endRow":93,"startRow":92,"endColumn":1,"startColumn":1},{"endRow":93,"startRow":92,"endColumn":3,"startColumn":3},{"endRow":93,"startRow":92,"endColumn":4,"startColumn":4},{"endRow":95,"startRow":94,"endColumn":0,"startColumn":0},{"endRow":95,"startRow":94,"endColumn":1,"startColumn":1},{"endRow":95,"startRow":94,"endColumn":3,"startColumn":3},{"endRow":95,"startRow":94,"endColumn":4,"startColumn":4},{"endRow":97,"startRow":97,"endColumn":2,"startColumn":0},{"endRow":97,"startRow":97,"endColumn":5,"startColumn":3},{"endRow":99,"startRow":98,"endColumn":0,"startColumn":0},{"endRow":99,"startRow":98,"endColumn":1,"startColumn":1},{"endRow":99,"startRow":98,"endColumn":3,"startColumn":3},{"endRow":99,"startRow":98,"endColumn":4,"startColumn":4},{"endRow":101,"startRow":100,"endColumn":0,"startColumn":0},{"endRow":101,"startRow":100,"endColumn":1,"startColumn":1},{"endRow":101,"startRow":100,"endColumn":3,"startColumn":3},{"endRow":101,"startRow":100,"endColumn":4,"startColumn":4},{"endRow":103,"startRow":102,"endColumn":0,"startColumn":0},{"endRow":103,"startRow":102,"endColumn":1,"startColumn":1},{"endRow":103,"startRow":102,"endColumn":3,"startColumn":3},{"endRow":103,"startRow":102,"endColumn":4,"startColumn":4},{"endRow":105,"startRow":104,"endColumn":0,"startColumn":0},{"endRow":105,"startRow":104,"endColumn":1,"startColumn":1},{"endRow":105,"startRow":104,"endColumn":3,"startColumn":3},{"endRow":105,"startRow":104,"endColumn":4,"startColumn":4},{"endRow":107,"startRow":106,"endColumn":0,"startColumn":0},{"endRow":107,"startRow":106,"endColumn":1,"startColumn":1},{"endRow":107,"startRow":106,"endColumn":3,"startColumn":3},{"endRow":107,"startRow":106,"endColumn":4,"startColumn":4},{"endRow":109,"startRow":108,"endColumn":0,"startColumn":0},{"endRow":109,"startRow":108,"endColumn":1,"startColumn":1},{"endRow":109,"startRow":108,"endColumn":3,"startColumn":3},{"endRow":109,"startRow":108,"endColumn":4,"startColumn":4},{"endRow":111,"startRow":110,"endColumn":0,"startColumn":0},{"endRow":111,"startRow":110,"endColumn":1,"startColumn":1},{"endRow":111,"startRow":110,"endColumn":3,"startColumn":3},{"endRow":111,"startRow":110,"endColumn":4,"startColumn":4},{"endRow":113,"startRow":112,"endColumn":0,"startColumn":0},{"endRow":113,"startRow":112,"endColumn":1,"startColumn":1},{"endRow":113,"startRow":112,"endColumn":3,"startColumn":3},{"endRow":113,"startRow":112,"endColumn":4,"startColumn":4},{"endRow":115,"startRow":114,"endColumn":0,"startColumn":0},{"endRow":115,"startRow":114,"endColumn":1,"startColumn":1},{"endRow":115,"startRow":114,"endColumn":3,"startColumn":3},{"endRow":115,"startRow":114,"endColumn":4,"startColumn":4},{"endRow":117,"startRow":116,"endColumn":0,"startColumn":0},{"endRow":117,"startRow":116,"endColumn":1,"startColumn":1},{"endRow":117,"startRow":116,"endColumn":3,"startColumn":3},{"endRow":117,"startRow":116,"endColumn":4,"startColumn":4},{"endRow":119,"startRow":118,"endColumn":0,"startColumn":0},{"endRow":119,"startRow":118,"endColumn":1,"startColumn":1},{"endRow":119,"startRow":118,"endColumn":3,"startColumn":3},{"endRow":119,"startRow":118,"endColumn":4,"startColumn":4},{"endRow":121,"startRow":121,"endColumn":2,"startColumn":0},{"endRow":121,"startRow":121,"endColumn":5,"startColumn":3},{"endRow":123,"startRow":122,"endColumn":0,"startColumn":0},{"endRow":123,"startRow":122,"endColumn":1,"startColumn":1},{"endRow":123,"startRow":122,"endColumn":3,"startColumn":3},{"endRow":123,"startRow":122,"endColumn":4,"startColumn":4},{"endRow":125,"startRow":124,"endColumn":0,"startColumn":0},{"endRow":125,"startRow":124,"endColumn":1,"startColumn":1},{"endRow":125,"startRow":124,"endColumn":3,"startColumn":3},{"endRow":125,"startRow":124,"endColumn":4,"startColumn":4},{"endRow":127,"startRow":126,"endColumn":0,"startColumn":0},{"endRow":127,"startRow":126,"endColumn":1,"startColumn":1},{"endRow":127,"startRow":126,"endColumn":3,"startColumn":3},{"endRow":127,"startRow":126,"endColumn":4,"startColumn":4},{"endRow":129,"startRow":128,"endColumn":0,"startColumn":0},{"endRow":129,"startRow":128,"endColumn":1,"startColumn":1},{"endRow":129,"startRow":128,"endColumn":3,"startColumn":3},{"endRow":129,"startRow":128,"endColumn":4,"startColumn":4},{"endRow":131,"startRow":130,"endColumn":0,"startColumn":0},{"endRow":131,"startRow":130,"endColumn":1,"startColumn":1},{"endRow":131,"startRow":130,"endColumn":3,"startColumn":3},{"endRow":131,"startRow":130,"endColumn":4,"startColumn":4},{"endRow":133,"startRow":132,"endColumn":0,"startColumn":0},{"endRow":133,"startRow":132,"endColumn":1,"startColumn":1},{"endRow":133,"startRow":132,"endColumn":3,"startColumn":3},{"endRow":133,"startRow":132,"endColumn":4,"startColumn":4},{"endRow":135,"startRow":134,"endColumn":0,"startColumn":0},{"endRow":135,"startRow":134,"endColumn":1,"startColumn":1},{"endRow":135,"startRow":134,"endColumn":3,"startColumn":3},{"endRow":135,"startRow":134,"endColumn":4,"startColumn":4},{"endRow":137,"startRow":136,"endColumn":0,"startColumn":0},{"endRow":137,"startRow":136,"endColumn":1,"startColumn":1},{"endRow":137,"startRow":136,"endColumn":3,"startColumn":3},{"endRow":137,"startRow":136,"endColumn":4,"startColumn":4},{"endRow":139,"startRow":138,"endColumn":0,"startColumn":0},{"endRow":139,"startRow":138,"endColumn":1,"startColumn":1},{"endRow":139,"startRow":138,"endColumn":3,"startColumn":3},{"endRow":139,"startRow":138,"endColumn":4,"startColumn":4},{"endRow":141,"startRow":140,"endColumn":0,"startColumn":0},{"endRow":141,"startRow":140,"endColumn":1,"startColumn":1},{"endRow":141,"startRow":140,"endColumn":3,"startColumn":3},{"endRow":141,"startRow":140,"endColumn":4,"startColumn":4},{"endRow":143,"startRow":142,"endColumn":0,"startColumn":0},{"endRow":143,"startRow":142,"endColumn":1,"startColumn":1},{"endRow":143,"startRow":142,"endColumn":3,"startColumn":3},{"endRow":143,"startRow":142,"endColumn":4,"startColumn":4}],"rowHeader":{"width":46,"hidden":0},"scrollTop":200,"zoomRatio":1,"columnData":{"0":{"w":88},"1":{"w":167},"2":{"w":93},"3":{"w":88},"4":{"w":161},"5":{"w":99}},"scrollLeft":100,"rightToLeft":0,"columnHeader":{"height":20,"hidden":0},"showGridlines":1,"defaultRowHeight":24,"defaultColumnWidth":88,"cellData":{"0":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{"width":348,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":2,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"вторник          30. 07\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23,"paragraphStyle":{"horizontalAlign":2}}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          30. 07","t":1,"s":"nngjWc"},"1":{"s":"nngjWc"},"2":{"s":"nngjWc"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{"width":348,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":2,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"среда          31. 07\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21,"paragraphStyle":{"horizontalAlign":2}}]},"drawings":{},"drawingsOrder":[]},"v":"среда          31. 07","t":1,"s":"BbWjRT"},"4":{"s":"BbWjRT"},"5":{"s":"BbWjRT"},"6":{}},"1":{"0":{"v":"МГС","t":1,"s":"s0sBDr"},"1":{"v":"кострома- иваново","t":1,"s":"jr8Uf_"},"2":{"v":101,"t":2,"s":"Yg05-k"},"3":{"v":"МГС","t":1,"s":"zL3fJB"},"4":{"v":"севмаш","t":1,"s":"jr8Uf_"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" 121\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":121,"t":2,"s":"Yg05-k"}},"2":{"0":{"s":"s0sBDr"},"1":{"s":"jr8Uf_"},"2":{"v":"яковлев","t":1,"s":"j4Y0Ux"},"3":{"s":"zL3fJB"},"4":{"s":"jr8Uf_"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" неелов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":" неелов","t":1,"s":"VUUH_A"}},"3":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"балтика  ярославль","t":1,"s":"IRciPJ"},"2":{"v":69,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"балтика  СПБ","t":1,"s":"IRciPJ"},"5":{"v":806,"t":2,"s":"VUUH_A"}},"4":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"иванов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"бучков  дом \r\n","textRuns":[{"st":11,"ed":12,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":12,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":"бучков  дом ","t":1,"s":"VUUH_A"}},"5":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"ДРГБ  перев","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{"width":161,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":2,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" Эр ликид Зеленоград перенес эрликид на курск  01/08\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":52,"paragraphStyle":{"horizontalAlign":2}}]},"drawings":{},"drawingsOrder":[]},"v":" Эр ликид Зеленоград перенес эрликид на курск  01/08","t":1,"s":"IRciPJ"},"5":{"v":952,"t":2,"s":"VUUH_A"},"6":{"v":12,"t":2}},"6":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"михайлов","t":1,"s":"VUUH_A"}},"7":{"0":{"v":"ДРГБ инерт","t":1,"s":"iI-vIA"},"1":{"v":"деметра+дана","t":1,"s":"42YQXa"},"2":{"v":23,"t":2,"s":"j4Y0Ux"},"3":{"v":"ДРГ  инерт","t":1,"s":"tuoSZB"},"4":{"v":"малаховка  перенос! дост с 31 на 1","t":1,"s":"-G4yHe"},"5":{"v":23,"t":2,"s":"VUUH_A"}},"8":{"0":{"s":"iI-vIA"},"1":{"s":"42YQXa"},"2":{"v":"жарков","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"-G4yHe"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"жарков \r\n","textRuns":[{"st":6,"ed":7,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":"жарков ","t":1,"s":"VUUH_A"}},"9":{"0":{"v":"ДРГБ инерт","t":1,"s":"iJ7t0w"},"1":{"v":"тверьгазсервис","t":1,"s":"42YQXa"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{"width":93,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":1,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" сам\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4,"paragraphStyle":{"horizontalAlign":1}}]},"drawings":{},"drawingsOrder":[]},"v":" сам","t":1,"s":"j4Y0Ux"},"3":{"v":"ДРГБ  перев","t":1,"s":"tuoSZB"},"4":{"v":"айс  лайн МСК","t":1,"s":"IRciPJ"},"5":{"v":409,"t":2,"s":"VUUH_A"}},"10":{"0":{"s":"iJ7t0w"},"1":{"s":"42YQXa"},"2":{"v":"погодин","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"агафонов","t":1,"s":"VUUH_A"}},"11":{"0":{"v":" ","t":1,"s":"s0sBDr"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"-24B0b"},"3":{"v":"НМСК","t":1,"s":"tuoSZB"},"4":{"v":"сухой лёд","t":1,"s":"IRciPJ"},"5":{"v":963,"t":2,"s":"GMjeOw"}},"12":{"0":{"s":"s0sBDr"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"qKBjMP"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"хоменко","t":1,"s":"kLHBou"}},"13":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{"width":167,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":2,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"криосфера \r\n","textRuns":[{"st":9,"ed":10,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10,"paragraphStyle":{"horizontalAlign":2}}]},"drawings":{},"drawingsOrder":[]},"v":"криосфера ","t":1,"s":"IRciPJ"},"2":{"v":667,"t":2,"s":"kLHBou"},"3":{"v":"МДЛ","t":1,"s":"tuoSZB"},"4":{"v":"криосфера сам","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"14":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"шарапов","t":1,"s":"kLHBou"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"перевезен","t":1,"s":"kLHBou"}},"15":{"0":{"v":"ПСК","t":1,"s":"_Pm9pi"},"1":{"v":"айс  лайн МСК","t":1,"s":"IRciPJ"},"2":{"v":409,"t":2,"s":"Yg05-k"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"Yg05-k"}},"16":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"агафонов","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"17":{"0":{"v":"АКР инерт","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"-24B0b"},"3":{"v":"АКР  перев","t":1,"s":"tuoSZB"},"4":{"v":"ТВСЗ","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" 031\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":31,"t":2,"s":"GMjeOw"}},"18":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"qKBjMP"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"ковалёв","t":1,"s":"kLHBou"}},"19":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":"криопродукт","t":1,"s":"IRciPJ"},"2":{"v":314,"t":2,"s":"qKBjMP"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":"Б. З","t":1,"s":"IRciPJ"},"5":{"v":82,"t":2,"s":"kLHBou"}},"20":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"тим","t":1,"s":"j8f64e"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Мурихин","t":1,"s":"Yg05-k"}},"21":{"0":{"v":"АКР","t":1,"s":"O6hJoz"},"1":{"v":"  ","t":1,"s":"er-v9N"},"2":{"v":" ","t":1,"s":"-24B0b"},"3":{"v":" ","t":1,"s":"Lrabia"},"4":{"v":" ","t":1,"s":"er-v9N"},"5":{"v":" ","t":1,"s":"GMjeOw"}},"22":{"0":{"s":"O6hJoz"},"1":{"s":"er-v9N"},"2":{"v":" ","t":1,"s":"qKBjMP"},"3":{"s":"Lrabia"},"4":{"s":"er-v9N"},"5":{"v":" ","t":1,"s":"kLHBou"}},"23":{"0":{"v":" ","t":1,"s":"UgrKmv"},"1":{"v":" ","t":1,"s":"jr8Uf_"},"2":{"v":" ","t":1,"s":"qKBjMP"},"3":{"v":" ","t":1,"s":"ByLwy0"},"4":{"v":" ","t":1,"s":"l4wiJv"},"5":{"v":" ","t":1,"s":"kLHBou"}},"24":{"0":{"v":" ","t":1,"s":"vS0zRT"},"1":{"v":"  ","t":1,"s":"axtsR8"},"2":{"v":" ","t":1,"s":"l4wiJv"},"3":{"v":" ","t":1,"s":"axtsR8"},"4":{"v":" ","t":1,"s":"l4wiJv"},"5":{"v":" ","t":1,"s":"l4wiJv"}},"25":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          6. 08\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":22}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          6. 08","t":1,"s":"kKh0FJ"},"1":{"s":"kKh0FJ"},"2":{"s":"kKh0FJ"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          7. 08\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":20}]},"drawings":{},"drawingsOrder":[]},"v":"среда          7. 08","t":1,"s":"YXWmSD"},"4":{"s":"YXWmSD"},"5":{"s":"YXWmSD"}},"26":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Ярпож дост 07\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":14}]},"drawings":{},"drawingsOrder":[]},"v":" Ярпож дост 07","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 121\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":121,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"криотех  2т+ севмаш","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 314\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":314,"t":2,"s":"j4Y0Ux"}},"27":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" неёлов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7}]},"drawings":{},"drawingsOrder":[]},"v":" неёлов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Ковалев","t":1,"s":"VUUH_A"}},"28":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Криоген сервис Вологда\r\n","textRuns":[{"st":0,"ed":1,"ts":{"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":" Криоген сервис Вологда","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 069\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":69,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"Сясь  строй 16т","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 069\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":69,"t":2,"s":"VUUH_A"}},"29":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Иванов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7}]},"drawings":{},"drawingsOrder":[]},"v":" Иванов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Иванов дом\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":11}]},"drawings":{},"drawingsOrder":[]},"v":" Иванов дом","t":1,"s":"j4Y0Ux"}},"30":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"31":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"32":{"0":{"v":"ДРГБ инерт","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  малаховка !!! дост 07\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"  малаховка !!! дост 07","t":1,"s":"IRciPJ"},"2":{"v":82,"t":2,"s":"VUUH_A"},"3":{"v":"ДРГБ  перев","t":1,"s":"tuoSZB"},"4":{"v":"айс  лайн МСК","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 409\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":409,"t":2,"s":"j4Y0Ux"}},"33":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Мурихин","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Тимошкин\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" Тимошкин","t":1,"s":"VUUH_A"}},"34":{"0":{"v":"ДРГБ инерт","t":1,"s":"_Pm9pi"},"1":{"v":"Аливария","t":1,"s":"IRciPJ"},"2":{"v":23,"t":2,"s":"VUUH_A"},"3":{"v":"ДРГ  инерт","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"Афанасий \r\n","textRuns":[{"st":8,"ed":9,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":"Афанасий ","t":1,"s":"IRciPJ"},"5":{"v":952,"t":2,"s":"VUUH_A"}},"35":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Пачев","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"михайлов","t":1,"s":"VUUH_A"}},"36":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"37":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"38":{"0":{"v":"МДЛ","t":1,"s":"O6hJoz"},"1":{"v":"криосфера сам","t":1,"s":"er-v9N"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МДЛ","t":1,"s":"Lrabia"},"4":{"v":" ","t":1,"s":"er-v9N"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"39":{"0":{"s":"O6hJoz"},"1":{"s":"er-v9N"},"2":{"v":"перевезен","t":1,"s":"VUUH_A"},"3":{"s":"Lrabia"},"4":{"s":"er-v9N"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"40":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР \r\n","textRuns":[{"st":3,"ed":4,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":"АКР ","t":1,"s":"s0sBDr"},"1":{"v":" ","t":1,"s":"jr8Uf_"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"АКР инерт","t":1,"s":"zL3fJB"},"4":{"v":" ","t":1,"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"41":{"0":{"s":"s0sBDr"},"1":{"s":"jr8Uf_"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"zL3fJB"},"4":{"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"42":{"0":{"v":"АКР","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":"Балтика  спб","t":1,"s":"IRciPJ"},"5":{"v":101,"t":2,"s":"j4Y0Ux"}},"43":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Яковлев","t":1,"s":"j4Y0Ux"}},"44":{"0":{"v":"АКР инерт","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  Адмирал Верфи\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":15}]},"drawings":{},"drawingsOrder":[]},"v":"  Адмирал Верфи","t":1,"s":"IRciPJ"},"2":{"v":31,"t":2,"s":"j4Y0Ux"},"3":{"v":"АКР  перев","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"45":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"арт","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"46":{"0":{"v":"АКР инерт","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  ТИМ МЕН С Агафон\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":18}]},"drawings":{},"drawingsOrder":[]},"v":"  ТИМ МЕН С Агафон","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР","t":1,"s":"tuoSZB"},"4":{"v":"лоренс  кириши","t":1,"s":"IRciPJ"},"5":{"v":101,"t":2,"s":"j4Y0Ux"}},"47":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Яковлев","t":1,"s":"j4Y0Ux"}},"48":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"v":"ДОПОГ  3650, 0475,Ситрак , свифт","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"teWCYG"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" агафонов дом!!!!!!!!\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(255,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":" агафонов дом!!!!!!!!","t":1,"s":"rRHXCi"},"5":{"v":" ","t":1,"s":"teWCYG"}},"49":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          13. 08\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          13. 08","t":1,"s":"EfpNMr"},"1":{"s":"EfpNMr"},"2":{"s":"EfpNMr"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          14. 08\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":"среда          14. 08","t":1,"s":"yh_sE-"},"4":{"s":"yh_sE-"},"5":{"s":"yh_sE-"}},"50":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"Архангельск  Синара ?????","t":1,"s":"er-v9N"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 806\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":806,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"криотехнология  4т+ севмаш","t":1,"s":"er-v9N"},"5":{"v":31,"t":2,"s":"j4Y0Ux"}},"51":{"0":{"s":"_Pm9pi"},"1":{"s":"er-v9N"},"2":{"v":"григорьев","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"er-v9N"},"5":{"v":"арт","t":1,"s":"VUUH_A"}},"52":{"0":{"v":"МГС","t":1,"s":"cxzkeh"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  Адмирал верфи 13-14/08 ДОМ\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":28}]},"drawings":{},"drawingsOrder":[]},"v":"  Адмирал верфи 13-14/08 ДОМ","t":1,"s":"0WnwAs"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 314\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":314,"t":2,"s":"j4Y0Ux"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" мурманск\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" мурманск","t":1,"s":"_FEqKG"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" гончарук\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" гончарук","t":1,"s":"VUUH_A"}},"53":{"0":{"s":"cxzkeh"},"1":{"s":"0WnwAs"},"2":{"v":"Ковалев","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"_FEqKG"},"5":{"v":" ","t":1,"s":"GMjeOw"}},"54":{"0":{"v":" ","t":1,"s":"iI-vIA"},"1":{"v":" ","t":1,"s":"Uv_Oof"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"kLHBou"}},"55":{"0":{"s":"iI-vIA"},"1":{"s":"Uv_Oof"},"2":{"v":" ","t":1,"s":"GMjeOw"},"3":{"s":"tuoSZB"},"4":{"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"kLHBou"}},"56":{"0":{"v":"ДРГБ перев","t":1,"s":"s0sBDr"},"1":{"v":"айс лайн МСК","t":1,"s":"jr8Uf_"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 409\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":409,"t":2,"s":"qKBjMP"},"3":{"v":"ДРГ инерт","t":1,"s":"cxzkeh"},"4":{"v":"эр  ликид КМПЗ 16 дост через инерт","t":1,"s":"42YQXa"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 101 \r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":4,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":101,"t":2,"s":"kLHBou"}},"57":{"0":{"s":"s0sBDr"},"1":{"s":"jr8Uf_"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Тимошкин\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" Тимошкин","t":1,"s":"Yg05-k"},"3":{"s":"cxzkeh"},"4":{"s":"42YQXa"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Жарков\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7}]},"drawings":{},"drawingsOrder":[]},"v":" Жарков","t":1,"s":"j8f64e"}},"58":{"0":{"v":"ДРГБ  инерт","t":1,"s":"_Pm9pi"},"1":{"v":"сухой лед","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 101 \r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":4,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":101,"t":2,"s":"VUUH_A"},"3":{"v":"ДРГ инерт","t":1,"s":"cxzkeh"},"4":{"v":"сухой лед","t":1,"s":"42YQXa"},"5":{"v":23,"t":2,"s":"VUUH_A"}},"59":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Жарков\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7}]},"drawings":{},"drawingsOrder":[]},"v":" Жарков","t":1,"s":"j4Y0Ux"},"3":{"s":"cxzkeh"},"4":{"s":"42YQXa"},"5":{"v":"Пачев","t":1,"s":"VUUH_A"}},"60":{"0":{"v":" ","t":1,"s":"O6hJoz"},"1":{"v":" ","t":1,"s":"er-v9N"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"iI-vIA"},"4":{"v":"лидер малаховка дост  14.08. 16-20 тн. отмена","t":1,"s":"tAvy1Y"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"61":{"0":{"s":"O6hJoz"},"1":{"s":"er-v9N"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"iI-vIA"},"4":{"s":"tAvy1Y"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"62":{"0":{"v":"МДЛ","t":1,"s":"s0sBDr"},"1":{"v":"криосфера сам","t":1,"s":"_FEqKG"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МДЛ","t":1,"s":"fjIvvJ"},"4":{"v":" ","t":1,"s":"P-90jh"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"63":{"0":{"s":"s0sBDr"},"1":{"s":"_FEqKG"},"2":{"v":"перевезен","t":1,"s":"VUUH_A"},"3":{"s":"fjIvvJ"},"4":{"s":"P-90jh"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"64":{"0":{"v":" ","t":1,"s":"FTYXhd"},"1":{"v":" ","t":1,"s":"0WnwAs"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"АКР перев","t":1,"s":"cxzkeh"},"4":{"v":"Айс Лайн","t":1,"s":"0WnwAs"},"5":{"v":314,"t":2,"s":"VUUH_A"}},"65":{"0":{"s":"FTYXhd"},"1":{"s":"0WnwAs"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"cxzkeh"},"4":{"s":"0WnwAs"},"5":{"v":7927,"t":2,"s":"VUUH_A"}},"66":{"0":{"v":"АКР перев +инерт","t":1,"s":"FTYXhd"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Техносвар 10т +  Кингисеп\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":16,"ed":18,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":26}]},"drawings":{},"drawingsOrder":[]},"v":" Техносвар 10т +  Кингисеп","t":1,"s":"42YQXa"},"2":{"v":"494 +2459","t":1,"s":"VUUH_A"},"3":{"v":"АКР инерт","t":1,"s":"tuoSZB"},"4":{"v":"БЗ!!","t":1,"s":"IRciPJ"},"5":{"v":"494 +2459","t":1,"s":"VUUH_A"}},"67":{"0":{"s":"FTYXhd"},"1":{"s":"42YQXa"},"2":{"v":"Шарапов","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Шарапов","t":1,"s":"VUUH_A"}},"68":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":963,"t":2,"s":"VUUH_A"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"69":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"конд \r\n","textRuns":[{"st":4,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":"конд ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"70":{"0":{"v":"АКР","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР","t":1,"s":"tuoSZB"},"4":{"v":"стоит  Химтеко","t":1,"s":"KUm7LV"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"71":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"KUm7LV"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"72":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  7553 ремонт\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":13}]},"drawings":{},"drawingsOrder":[]},"v":"  7553 ремонт","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"teWCYG"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"v":"14/08(НЕ  ПОЗЖЕ)смена ковалев-агафонов","t":1,"s":"rRHXCi"},"5":{"v":" ","t":1,"s":"teWCYG"}},"73":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          20. 08\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          20. 08","t":1,"s":"EfpNMr"},"1":{"s":"EfpNMr"},"2":{"s":"EfpNMr"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          21. 08\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":"среда          21. 08","t":1,"s":"yh_sE-"},"4":{"s":"yh_sE-"},"5":{"s":"yh_sE-"}},"74":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Архангельск Сатурн\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":19}]},"drawings":{},"drawingsOrder":[]},"v":" Архангельск Сатурн","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 952\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":952,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"севмаш  !!","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 101 \r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":4,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":101,"t":2,"s":"VUUH_A"}},"75":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"михайлов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  Жарков\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":8}]},"drawings":{},"drawingsOrder":[]},"v":"  Жарков","t":1,"s":"j4Y0Ux"}},"76":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"БЗ","t":1,"s":"IRciPJ"},"2":{"v":"494+2459","t":1,"s":"xG9tat"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" кострома +   иваново!!!!!+ остаток Кузнечиха\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":11,"ed":14,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":45}]},"drawings":{},"drawingsOrder":[]},"v":" кострома +   иваново!!!!!+ остаток Кузнечиха","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  963\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":963,"t":2,"s":"VUUH_A"}},"77":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Шарапов","t":1,"s":"xG9tat"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"кондрат","t":1,"s":"j4Y0Ux"}},"78":{"0":{"v":" ","t":1,"s":"FTYXhd"},"1":{"v":" ","t":1,"s":"42YQXa"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"79":{"0":{"s":"FTYXhd"},"1":{"s":"42YQXa"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"wpzXdZ"}},"80":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"er-v9N"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"ДРГБ  перев","t":1,"s":"tuoSZB"},"4":{"v":"айс  лайн МСК","t":1,"s":"IRciPJ"},"5":{"v":31,"t":2,"s":"j4Y0Ux"}},"81":{"0":{"s":"_Pm9pi"},"1":{"s":"er-v9N"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"артамонов","t":1,"s":"VUUH_A"}},"82":{"0":{"v":"ДРГБ инерт","t":1,"s":"cxzkeh"},"1":{"v":"Владимир !!!","t":1,"s":"0WnwAs"},"2":{"v":82,"t":2,"s":"j4Y0Ux"},"3":{"v":"ДРГ  инерт","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"альянс  крио 8-10 тонн подтв.!  + Афанасий 8 т\r\n","textRuns":[{"st":30,"ed":32,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":46}]},"drawings":{},"drawingsOrder":[]},"v":"альянс  крио 8-10 тонн подтв.!  + Афанасий 8 т","t":1,"s":"IRciPJ"},"5":{"v":314,"t":2,"s":"j4Y0Ux"}},"83":{"0":{"s":"cxzkeh"},"1":{"s":"0WnwAs"},"2":{"v":"Орлов","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Агафанов","t":1,"s":"VUUH_A"}},"84":{"0":{"v":" ","t":1,"s":"cxzkeh"},"1":{"v":"  ","t":1,"s":"42YQXa"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"031 арт то тверь  \r\n","textRuns":[{"st":16,"ed":18,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":18}]},"drawings":{},"drawingsOrder":[]},"v":"031 арт то тверь  ","t":1,"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"85":{"0":{"s":"cxzkeh"},"1":{"s":"42YQXa"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"86":{"0":{"v":"МДЛ","t":1,"s":"iI-vIA"},"1":{"v":"  ","t":1,"s":"Uv_Oof"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МДЛ","t":1,"s":"Lrabia"},"4":{"v":"перевезенцев","t":1,"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"87":{"0":{"s":"iI-vIA"},"1":{"s":"Uv_Oof"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"Lrabia"},"4":{"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"88":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР \r\n","textRuns":[{"st":3,"ed":4,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":"АКР ","t":1,"s":"0bAkDO"},"1":{"v":" ","t":1,"s":"0WnwAs"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"zL3fJB"},"4":{"v":"пром газ технология","t":1,"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"89":{"0":{"s":"0bAkDO"},"1":{"s":"0WnwAs"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"zL3fJB"},"4":{"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"90":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР \r\n","textRuns":[{"st":3,"ed":4,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":"АКР ","t":1,"s":"_Pm9pi"},"1":{"v":"Айс  Лайн","t":1,"s":"IRciPJ"},"2":{"v":409,"t":2,"s":"VUUH_A"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"Сегодня  погрузок нет\r\n","textRuns":[{"st":7,"ed":9,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":"Сегодня  погрузок нет","t":1,"s":"er-v9N"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"91":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"тимошкин","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"er-v9N"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"92":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":"ПУЗ  груз 409 перегр в хоменко","t":1,"s":"IRciPJ"},"2":{"v":"121+  новая","t":1,"s":"VUUH_A"},"3":{"v":"АКР  перев","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"93":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"хоменко","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"94":{"0":{"v":"АКР","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"95":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"-24B0b"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"96":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"v":"  ","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"D9frdN"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"v":" ","t":1,"s":"j4CHDO"},"5":{"v":" ","t":1,"s":"qnIi_R"}},"97":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          27. 08\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          27. 08","t":1,"s":"EfpNMr"},"1":{"s":"EfpNMr"},"2":{"s":"EfpNMr"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          28. 08\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":"среда          28. 08","t":1,"s":"yh_sE-"},"4":{"s":"yh_sE-"},"5":{"s":"yh_sE-"}},"98":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"из  графика","t":1,"s":"IRciPJ"},"2":{"v":409,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  норд газ !!! + вилаш\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":22}]},"drawings":{},"drawingsOrder":[]},"v":"  норд газ !!! + вилаш","t":1,"s":"IRciPJ"},"5":{"v":"494+2459","t":1,"s":"xG9tat"}},"99":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Ковалев","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" хоменко\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":8}]},"drawings":{},"drawingsOrder":[]},"v":" хоменко","t":1,"s":"j4Y0Ux"}},"100":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":"мерс","t":1,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"ЯЗН  выгрузка 29/08\r\n","textRuns":[{"st":3,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":19}]},"drawings":{},"drawingsOrder":[]},"v":"ЯЗН  выгрузка 29/08","t":1,"s":"IRciPJ"},"5":{"v":952,"t":2,"s":"xG9tat"}},"101":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Гончарук","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"михайлов","t":1,"s":"xG9tat"}},"102":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"ДАНА  на 29 + сухой лед","t":1,"s":"IRciPJ"},"5":{"v":82,"t":2,"s":"VUUH_A"}},"103":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"орлов","t":1,"s":"VUUH_A"}},"104":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"МДЛ","t":1,"s":"tuoSZB"},"4":{"v":"деметра","t":1,"s":"7JSR5j"},"5":{"v":314,"t":2,"s":"hBZsKH"}},"105":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Кабанов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":8}]},"drawings":{},"drawingsOrder":[]},"v":" Кабанов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"7JSR5j"},"5":{"v":"Агафонов","t":1,"s":"y2OD4R"}},"106":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":23,"t":2,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"107":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Яковлев","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"GMjeOw"}},"108":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":"гос. номер а/м","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"109":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"110":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"111":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"112":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР  инерт \r\n","textRuns":[{"st":10,"ed":11,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":11}]},"drawings":{},"drawingsOrder":[]},"v":"АКР  инерт ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":"сегодня 1- АМ","t":1,"s":"KUm7LV"},"5":{"v":" ","t":1,"s":"kLHBou"}},"113":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"KUm7LV"},"5":{"v":" ","t":1,"s":"kLHBou"}},"114":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР  инерт \r\n","textRuns":[{"st":10,"ed":11,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":11}]},"drawings":{},"drawingsOrder":[]},"v":"АКР  инерт ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":963,"t":2,"s":"xG9tat"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР перев \r\n","textRuns":[{"st":9,"ed":10,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10}]},"drawings":{},"drawingsOrder":[]},"v":"АКР перев ","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"1-  эр ликид зеленоград\r\n","textRuns":[{"st":2,"ed":4,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"1-  эр ликид зеленоград","t":1,"s":"IRciPJ"},"5":{"v":963,"t":2,"s":"Ji5JWX"}},"115":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Неелов","t":1,"s":"xG9tat"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Неелов","t":1,"s":"Ji5JWX"}},"116":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":"из  графика","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 121 +7553\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10}]},"drawings":{},"drawingsOrder":[]},"v":" 121 +7553","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":31,"t":2,"s":"Yg05-k"}},"117":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Шарапов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" артамонов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10}]},"drawings":{},"drawingsOrder":[]},"v":" артамонов","t":1,"s":"VUUH_A"}},"118":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР перев \r\n","textRuns":[{"st":9,"ed":10,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10}]},"drawings":{},"drawingsOrder":[]},"v":"АКР перев ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":806,"t":2,"s":"VUUH_A"}},"119":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Бучков","t":1,"s":"GMjeOw"}},"120":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"v":" ","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"teWCYG"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"v":" ","t":1,"s":"teWCYG"},"5":{"v":" ","t":1,"s":"D9frdN"}},"121":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          3. 09\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":22}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          3. 09","t":1,"s":"EfpNMr"},"1":{"s":"EfpNMr"},"2":{"s":"EfpNMr"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          4. 09\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":20}]},"drawings":{},"drawingsOrder":[]},"v":"среда          4. 09","t":1,"s":"yh_sE-"},"4":{"s":"yh_sE-"},"5":{"s":"yh_sE-"}},"122":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"Азотно  кислородный(криоген ресурс) !!!","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"севмаш","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"xG9tat"}},"123":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"xG9tat"}},"124":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Кострома + Иваново!!!\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":22}]},"drawings":{},"drawingsOrder":[]},"v":" Кострома + Иваново!!!","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" дом\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":" дом","t":1,"s":"IRciPJ"},"5":{"v":"494+2459","t":1,"s":"xG9tat"}},"125":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" хоменко\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":8}]},"drawings":{},"drawingsOrder":[]},"v":" хоменко","t":1,"s":"j4Y0Ux"}},"126":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"xG9tat"}},"127":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"128":{"0":{"v":"ПСК","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"НМСК","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"129":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"130":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"131":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"132":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"133":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"134":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"v":"малаховка  лидер выгрузка 04/08","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МДЛ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"135":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"136":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"137":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"138":{"0":{"v":"АКР инерт","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"139":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"140":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  ТВСЗ+ ТХМ\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":11}]},"drawings":{},"drawingsOrder":[]},"v":"  ТВСЗ+ ТХМ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР  перев","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Айс Лайн\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" Айс Лайн","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"141":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"142":{"0":{"v":"АКР","t":1,"s":"cxzkeh"},"1":{"v":"  ","t":1,"s":"42YQXa"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР","t":1,"s":"cxzkeh"},"4":{"v":" ","t":1,"s":"42YQXa"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"143":{"0":{"s":"cxzkeh"},"1":{"s":"42YQXa"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"cxzkeh"},"4":{"s":"42YQXa"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"144":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"v":"  ","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"teWCYG"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"v":"Хоменко-  кондратьев смена 4-5","t":1,"s":"teWCYG"},"5":{"v":" ","t":1,"s":"teWCYG"}}}
-// });
-
-// wb = univer.createUnit(UniverInstanceType.UNIVER_SHEET, {
-//     "id": "gyI0JO",
-//     "sheetOrder": [
-//         "6dmMGDzBrl9rHZ-a29_bW"
-//     ],
-//     "name": "",
-//     "appVersion": "0.1.11",
-//     "locale": "ruRU",
-//     "styles": {},
-//     "sheets": {
-//         "6dmMGDzBrl9rHZ-a29_bW": {
-//             "id":"6dmMGDzBrl9rHZ-a29_bW", "name":"shettus", "rowCount":1000, "columnCount":20, "freeze":{"xSplit":0,"ySplit":0,"startRow":-1,"startColumn":-1}, "hidden":0, "rowData":{"0":{"h":34,"ah":24},"1":{"h":34},"2":{"h":37},"3":{"h":29},"4":{"h":39},"5":{"h":40,"ah":24},"6":{"h":40},"7":{"h":37},"8":{"h":42},"9":{"h":44},"10":{"h":37},"11":{"h":37},"12":{"h":37},"13":{"h":37},"14":{"h":37},"15":{"h":37},"16":{"h":37},"17":{"h":37},"18":{"h":54},"19":{"h":37},"20":{"h":43},"21":{"h":37},"22":{"h":37},"23":{"h":61},"24":{"h":66},"25":{"h":36},"26":{"h":46},"27":{"h":41},"28":{"h":40},"29":{"h":36},"30":{"h":42},"31":{"h":37},"32":{"h":40},"33":{"h":40},"34":{"h":40},"35":{"h":35},"36":{"h":35},"37":{"h":35},"38":{"h":35},"39":{"h":35},"40":{"h":41},"41":{"h":41},"42":{"h":41},"43":{"h":41},"44":{"h":41},"45":{"h":41},"46":{"h":41},"47":{"h":43},"48":{"h":84},"49":{"h":36},"50":{"h":48},"51":{"h":28},"52":{"h":43},"53":{"h":29},"54":{"h":42},"55":{"h":40},"56":{"h":30},"57":{"h":70},"58":{"h":40},"59":{"h":40},"60":{"h":40},"61":{"h":40},"62":{"h":42},"63":{"h":38},"64":{"h":38},"65":{"h":38},"66":{"h":38},"67":{"h":47},"68":{"h":38},"69":{"h":38},"70":{"h":38},"71":{"h":34},"72":{"h":68},"73":{"h":36},"74":{"h":37},"75":{"h":40},"76":{"h":40},"77":{"h":41},"78":{"h":40},"79":{"h":46},"80":{"h":38},"81":{"h":38},"82":{"h":36},"83":{"h":52},"84":{"h":28},"85":{"h":28},"86":{"h":52},"87":{"h":34},"88":{"h":38},"89":{"h":38},"90":{"h":44},"91":{"h":46},"92":{"h":46},"93":{"h":34},"94":{"h":42},"95":{"h":42},"96":{"h":62},"97":{"h":36},"98":{"h":42},"99":{"h":38},"100":{"h":40},"101":{"h":42},"102":{"h":38},"103":{"h":43},"104":{"h":44},"105":{"h":42},"106":{"h":36},"107":{"h":50},"108":{"h":39},"109":{"h":39},"110":{"h":39},"111":{"h":39},"112":{"h":39},"113":{"h":39},"114":{"h":39},"115":{"h":39},"116":{"h":39},"117":{"h":39},"118":{"h":39},"119":{"h":40},"120":{"h":76},"121":{"h":25},"122":{"h":45},"123":{"h":44},"124":{"h":42},"125":{"h":31},"126":{"h":39},"127":{"h":48},"128":{"h":46},"129":{"h":46},"130":{"h":46},"131":{"h":46},"132":{"h":46},"133":{"h":46},"134":{"h":46},"135":{"h":46},"136":{"h":46},"137":{"h":41},"138":{"h":41},"139":{"h":41},"140":{"h":41},"141":{"h":41},"142":{"h":67},"143":{"h":25},"144":{"h":60}},"tabColor":"","mergeData":[{"endRow":0,"startRow":0,"endColumn":2,"startColumn":0},{"endRow":0,"startRow":0,"endColumn":5,"startColumn":3},{"endRow":2,"startRow":1,"endColumn":0,"startColumn":0},{"endRow":2,"startRow":1,"endColumn":1,"startColumn":1},{"endRow":2,"startRow":1,"endColumn":3,"startColumn":3},{"endRow":2,"startRow":1,"endColumn":4,"startColumn":4},{"endRow":4,"startRow":3,"endColumn":0,"startColumn":0},{"endRow":4,"startRow":3,"endColumn":1,"startColumn":1},{"endRow":4,"startRow":3,"endColumn":3,"startColumn":3},{"endRow":4,"startRow":3,"endColumn":4,"startColumn":4},{"endRow":6,"startRow":5,"endColumn":0,"startColumn":0},{"endRow":6,"startRow":5,"endColumn":1,"startColumn":1},{"endRow":6,"startRow":5,"endColumn":3,"startColumn":3},{"endRow":6,"startRow":5,"endColumn":4,"startColumn":4},{"endRow":8,"startRow":7,"endColumn":0,"startColumn":0},{"endRow":8,"startRow":7,"endColumn":1,"startColumn":1},{"endRow":8,"startRow":7,"endColumn":3,"startColumn":3},{"endRow":8,"startRow":7,"endColumn":4,"startColumn":4},{"endRow":10,"startRow":9,"endColumn":0,"startColumn":0},{"endRow":10,"startRow":9,"endColumn":1,"startColumn":1},{"endRow":10,"startRow":9,"endColumn":3,"startColumn":3},{"endRow":10,"startRow":9,"endColumn":4,"startColumn":4},{"endRow":12,"startRow":11,"endColumn":0,"startColumn":0},{"endRow":12,"startRow":11,"endColumn":1,"startColumn":1},{"endRow":12,"startRow":11,"endColumn":3,"startColumn":3},{"endRow":12,"startRow":11,"endColumn":4,"startColumn":4},{"endRow":14,"startRow":13,"endColumn":0,"startColumn":0},{"endRow":14,"startRow":13,"endColumn":1,"startColumn":1},{"endRow":14,"startRow":13,"endColumn":3,"startColumn":3},{"endRow":14,"startRow":13,"endColumn":4,"startColumn":4},{"endRow":16,"startRow":15,"endColumn":0,"startColumn":0},{"endRow":16,"startRow":15,"endColumn":1,"startColumn":1},{"endRow":16,"startRow":15,"endColumn":3,"startColumn":3},{"endRow":16,"startRow":15,"endColumn":4,"startColumn":4},{"endRow":18,"startRow":17,"endColumn":0,"startColumn":0},{"endRow":18,"startRow":17,"endColumn":1,"startColumn":1},{"endRow":18,"startRow":17,"endColumn":3,"startColumn":3},{"endRow":18,"startRow":17,"endColumn":4,"startColumn":4},{"endRow":20,"startRow":19,"endColumn":0,"startColumn":0},{"endRow":20,"startRow":19,"endColumn":1,"startColumn":1},{"endRow":20,"startRow":19,"endColumn":3,"startColumn":3},{"endRow":20,"startRow":19,"endColumn":4,"startColumn":4},{"endRow":22,"startRow":21,"endColumn":0,"startColumn":0},{"endRow":22,"startRow":21,"endColumn":1,"startColumn":1},{"endRow":22,"startRow":21,"endColumn":3,"startColumn":3},{"endRow":22,"startRow":21,"endColumn":4,"startColumn":4},{"endRow":25,"startRow":25,"endColumn":2,"startColumn":0},{"endRow":25,"startRow":25,"endColumn":5,"startColumn":3},{"endRow":27,"startRow":26,"endColumn":0,"startColumn":0},{"endRow":27,"startRow":26,"endColumn":1,"startColumn":1},{"endRow":27,"startRow":26,"endColumn":3,"startColumn":3},{"endRow":27,"startRow":26,"endColumn":4,"startColumn":4},{"endRow":29,"startRow":28,"endColumn":0,"startColumn":0},{"endRow":29,"startRow":28,"endColumn":1,"startColumn":1},{"endRow":29,"startRow":28,"endColumn":3,"startColumn":3},{"endRow":29,"startRow":28,"endColumn":4,"startColumn":4},{"endRow":31,"startRow":30,"endColumn":0,"startColumn":0},{"endRow":31,"startRow":30,"endColumn":1,"startColumn":1},{"endRow":31,"startRow":30,"endColumn":3,"startColumn":3},{"endRow":31,"startRow":30,"endColumn":4,"startColumn":4},{"endRow":33,"startRow":32,"endColumn":0,"startColumn":0},{"endRow":33,"startRow":32,"endColumn":1,"startColumn":1},{"endRow":33,"startRow":32,"endColumn":3,"startColumn":3},{"endRow":33,"startRow":32,"endColumn":4,"startColumn":4},{"endRow":35,"startRow":34,"endColumn":0,"startColumn":0},{"endRow":35,"startRow":34,"endColumn":1,"startColumn":1},{"endRow":35,"startRow":34,"endColumn":3,"startColumn":3},{"endRow":35,"startRow":34,"endColumn":4,"startColumn":4},{"endRow":37,"startRow":36,"endColumn":0,"startColumn":0},{"endRow":37,"startRow":36,"endColumn":1,"startColumn":1},{"endRow":37,"startRow":36,"endColumn":3,"startColumn":3},{"endRow":37,"startRow":36,"endColumn":4,"startColumn":4},{"endRow":39,"startRow":38,"endColumn":0,"startColumn":0},{"endRow":39,"startRow":38,"endColumn":1,"startColumn":1},{"endRow":39,"startRow":38,"endColumn":3,"startColumn":3},{"endRow":39,"startRow":38,"endColumn":4,"startColumn":4},{"endRow":41,"startRow":40,"endColumn":0,"startColumn":0},{"endRow":41,"startRow":40,"endColumn":1,"startColumn":1},{"endRow":41,"startRow":40,"endColumn":3,"startColumn":3},{"endRow":41,"startRow":40,"endColumn":4,"startColumn":4},{"endRow":43,"startRow":42,"endColumn":0,"startColumn":0},{"endRow":43,"startRow":42,"endColumn":1,"startColumn":1},{"endRow":43,"startRow":42,"endColumn":3,"startColumn":3},{"endRow":43,"startRow":42,"endColumn":4,"startColumn":4},{"endRow":45,"startRow":44,"endColumn":0,"startColumn":0},{"endRow":45,"startRow":44,"endColumn":1,"startColumn":1},{"endRow":45,"startRow":44,"endColumn":3,"startColumn":3},{"endRow":45,"startRow":44,"endColumn":4,"startColumn":4},{"endRow":47,"startRow":46,"endColumn":0,"startColumn":0},{"endRow":47,"startRow":46,"endColumn":1,"startColumn":1},{"endRow":47,"startRow":46,"endColumn":3,"startColumn":3},{"endRow":47,"startRow":46,"endColumn":4,"startColumn":4},{"endRow":49,"startRow":49,"endColumn":2,"startColumn":0},{"endRow":49,"startRow":49,"endColumn":5,"startColumn":3},{"endRow":51,"startRow":50,"endColumn":0,"startColumn":0},{"endRow":51,"startRow":50,"endColumn":1,"startColumn":1},{"endRow":51,"startRow":50,"endColumn":3,"startColumn":3},{"endRow":51,"startRow":50,"endColumn":4,"startColumn":4},{"endRow":53,"startRow":52,"endColumn":0,"startColumn":0},{"endRow":53,"startRow":52,"endColumn":1,"startColumn":1},{"endRow":53,"startRow":52,"endColumn":3,"startColumn":3},{"endRow":53,"startRow":52,"endColumn":4,"startColumn":4},{"endRow":55,"startRow":54,"endColumn":0,"startColumn":0},{"endRow":55,"startRow":54,"endColumn":1,"startColumn":1},{"endRow":55,"startRow":54,"endColumn":3,"startColumn":3},{"endRow":55,"startRow":54,"endColumn":4,"startColumn":4},{"endRow":57,"startRow":56,"endColumn":0,"startColumn":0},{"endRow":57,"startRow":56,"endColumn":1,"startColumn":1},{"endRow":57,"startRow":56,"endColumn":3,"startColumn":3},{"endRow":57,"startRow":56,"endColumn":4,"startColumn":4},{"endRow":59,"startRow":58,"endColumn":0,"startColumn":0},{"endRow":59,"startRow":58,"endColumn":1,"startColumn":1},{"endRow":59,"startRow":58,"endColumn":3,"startColumn":3},{"endRow":59,"startRow":58,"endColumn":4,"startColumn":4},{"endRow":61,"startRow":60,"endColumn":0,"startColumn":0},{"endRow":61,"startRow":60,"endColumn":1,"startColumn":1},{"endRow":61,"startRow":60,"endColumn":3,"startColumn":3},{"endRow":61,"startRow":60,"endColumn":4,"startColumn":4},{"endRow":63,"startRow":62,"endColumn":0,"startColumn":0},{"endRow":63,"startRow":62,"endColumn":1,"startColumn":1},{"endRow":63,"startRow":62,"endColumn":3,"startColumn":3},{"endRow":63,"startRow":62,"endColumn":4,"startColumn":4},{"endRow":65,"startRow":64,"endColumn":0,"startColumn":0},{"endRow":65,"startRow":64,"endColumn":1,"startColumn":1},{"endRow":65,"startRow":64,"endColumn":3,"startColumn":3},{"endRow":65,"startRow":64,"endColumn":4,"startColumn":4},{"endRow":67,"startRow":66,"endColumn":0,"startColumn":0},{"endRow":67,"startRow":66,"endColumn":1,"startColumn":1},{"endRow":67,"startRow":66,"endColumn":3,"startColumn":3},{"endRow":67,"startRow":66,"endColumn":4,"startColumn":4},{"endRow":69,"startRow":68,"endColumn":0,"startColumn":0},{"endRow":69,"startRow":68,"endColumn":1,"startColumn":1},{"endRow":69,"startRow":68,"endColumn":3,"startColumn":3},{"endRow":69,"startRow":68,"endColumn":4,"startColumn":4},{"endRow":71,"startRow":70,"endColumn":0,"startColumn":0},{"endRow":71,"startRow":70,"endColumn":1,"startColumn":1},{"endRow":71,"startRow":70,"endColumn":3,"startColumn":3},{"endRow":71,"startRow":70,"endColumn":4,"startColumn":4},{"endRow":73,"startRow":73,"endColumn":2,"startColumn":0},{"endRow":73,"startRow":73,"endColumn":5,"startColumn":3},{"endRow":75,"startRow":74,"endColumn":0,"startColumn":0},{"endRow":75,"startRow":74,"endColumn":1,"startColumn":1},{"endRow":75,"startRow":74,"endColumn":3,"startColumn":3},{"endRow":75,"startRow":74,"endColumn":4,"startColumn":4},{"endRow":77,"startRow":76,"endColumn":0,"startColumn":0},{"endRow":77,"startRow":76,"endColumn":1,"startColumn":1},{"endRow":77,"startRow":76,"endColumn":3,"startColumn":3},{"endRow":77,"startRow":76,"endColumn":4,"startColumn":4},{"endRow":79,"startRow":78,"endColumn":0,"startColumn":0},{"endRow":79,"startRow":78,"endColumn":1,"startColumn":1},{"endRow":79,"startRow":78,"endColumn":3,"startColumn":3},{"endRow":79,"startRow":78,"endColumn":4,"startColumn":4},{"endRow":81,"startRow":80,"endColumn":0,"startColumn":0},{"endRow":81,"startRow":80,"endColumn":1,"startColumn":1},{"endRow":81,"startRow":80,"endColumn":3,"startColumn":3},{"endRow":81,"startRow":80,"endColumn":4,"startColumn":4},{"endRow":83,"startRow":82,"endColumn":0,"startColumn":0},{"endRow":83,"startRow":82,"endColumn":1,"startColumn":1},{"endRow":83,"startRow":82,"endColumn":3,"startColumn":3},{"endRow":83,"startRow":82,"endColumn":4,"startColumn":4},{"endRow":85,"startRow":84,"endColumn":0,"startColumn":0},{"endRow":85,"startRow":84,"endColumn":1,"startColumn":1},{"endRow":85,"startRow":84,"endColumn":3,"startColumn":3},{"endRow":85,"startRow":84,"endColumn":4,"startColumn":4},{"endRow":87,"startRow":86,"endColumn":0,"startColumn":0},{"endRow":87,"startRow":86,"endColumn":1,"startColumn":1},{"endRow":87,"startRow":86,"endColumn":3,"startColumn":3},{"endRow":87,"startRow":86,"endColumn":4,"startColumn":4},{"endRow":89,"startRow":88,"endColumn":0,"startColumn":0},{"endRow":89,"startRow":88,"endColumn":1,"startColumn":1},{"endRow":89,"startRow":88,"endColumn":3,"startColumn":3},{"endRow":89,"startRow":88,"endColumn":4,"startColumn":4},{"endRow":91,"startRow":90,"endColumn":0,"startColumn":0},{"endRow":91,"startRow":90,"endColumn":1,"startColumn":1},{"endRow":91,"startRow":90,"endColumn":3,"startColumn":3},{"endRow":91,"startRow":90,"endColumn":4,"startColumn":4},{"endRow":93,"startRow":92,"endColumn":0,"startColumn":0},{"endRow":93,"startRow":92,"endColumn":1,"startColumn":1},{"endRow":93,"startRow":92,"endColumn":3,"startColumn":3},{"endRow":93,"startRow":92,"endColumn":4,"startColumn":4},{"endRow":95,"startRow":94,"endColumn":0,"startColumn":0},{"endRow":95,"startRow":94,"endColumn":1,"startColumn":1},{"endRow":95,"startRow":94,"endColumn":3,"startColumn":3},{"endRow":95,"startRow":94,"endColumn":4,"startColumn":4},{"endRow":97,"startRow":97,"endColumn":2,"startColumn":0},{"endRow":97,"startRow":97,"endColumn":5,"startColumn":3},{"endRow":99,"startRow":98,"endColumn":0,"startColumn":0},{"endRow":99,"startRow":98,"endColumn":1,"startColumn":1},{"endRow":99,"startRow":98,"endColumn":3,"startColumn":3},{"endRow":99,"startRow":98,"endColumn":4,"startColumn":4},{"endRow":101,"startRow":100,"endColumn":0,"startColumn":0},{"endRow":101,"startRow":100,"endColumn":1,"startColumn":1},{"endRow":101,"startRow":100,"endColumn":3,"startColumn":3},{"endRow":101,"startRow":100,"endColumn":4,"startColumn":4},{"endRow":103,"startRow":102,"endColumn":0,"startColumn":0},{"endRow":103,"startRow":102,"endColumn":1,"startColumn":1},{"endRow":103,"startRow":102,"endColumn":3,"startColumn":3},{"endRow":103,"startRow":102,"endColumn":4,"startColumn":4},{"endRow":105,"startRow":104,"endColumn":0,"startColumn":0},{"endRow":105,"startRow":104,"endColumn":1,"startColumn":1},{"endRow":105,"startRow":104,"endColumn":3,"startColumn":3},{"endRow":105,"startRow":104,"endColumn":4,"startColumn":4},{"endRow":107,"startRow":106,"endColumn":0,"startColumn":0},{"endRow":107,"startRow":106,"endColumn":1,"startColumn":1},{"endRow":107,"startRow":106,"endColumn":3,"startColumn":3},{"endRow":107,"startRow":106,"endColumn":4,"startColumn":4},{"endRow":109,"startRow":108,"endColumn":0,"startColumn":0},{"endRow":109,"startRow":108,"endColumn":1,"startColumn":1},{"endRow":109,"startRow":108,"endColumn":3,"startColumn":3},{"endRow":109,"startRow":108,"endColumn":4,"startColumn":4},{"endRow":111,"startRow":110,"endColumn":0,"startColumn":0},{"endRow":111,"startRow":110,"endColumn":1,"startColumn":1},{"endRow":111,"startRow":110,"endColumn":3,"startColumn":3},{"endRow":111,"startRow":110,"endColumn":4,"startColumn":4},{"endRow":113,"startRow":112,"endColumn":0,"startColumn":0},{"endRow":113,"startRow":112,"endColumn":1,"startColumn":1},{"endRow":113,"startRow":112,"endColumn":3,"startColumn":3},{"endRow":113,"startRow":112,"endColumn":4,"startColumn":4},{"endRow":115,"startRow":114,"endColumn":0,"startColumn":0},{"endRow":115,"startRow":114,"endColumn":1,"startColumn":1},{"endRow":115,"startRow":114,"endColumn":3,"startColumn":3},{"endRow":115,"startRow":114,"endColumn":4,"startColumn":4},{"endRow":117,"startRow":116,"endColumn":0,"startColumn":0},{"endRow":117,"startRow":116,"endColumn":1,"startColumn":1},{"endRow":117,"startRow":116,"endColumn":3,"startColumn":3},{"endRow":117,"startRow":116,"endColumn":4,"startColumn":4},{"endRow":119,"startRow":118,"endColumn":0,"startColumn":0},{"endRow":119,"startRow":118,"endColumn":1,"startColumn":1},{"endRow":119,"startRow":118,"endColumn":3,"startColumn":3},{"endRow":119,"startRow":118,"endColumn":4,"startColumn":4},{"endRow":121,"startRow":121,"endColumn":2,"startColumn":0},{"endRow":121,"startRow":121,"endColumn":5,"startColumn":3},{"endRow":123,"startRow":122,"endColumn":0,"startColumn":0},{"endRow":123,"startRow":122,"endColumn":1,"startColumn":1},{"endRow":123,"startRow":122,"endColumn":3,"startColumn":3},{"endRow":123,"startRow":122,"endColumn":4,"startColumn":4},{"endRow":125,"startRow":124,"endColumn":0,"startColumn":0},{"endRow":125,"startRow":124,"endColumn":1,"startColumn":1},{"endRow":125,"startRow":124,"endColumn":3,"startColumn":3},{"endRow":125,"startRow":124,"endColumn":4,"startColumn":4},{"endRow":127,"startRow":126,"endColumn":0,"startColumn":0},{"endRow":127,"startRow":126,"endColumn":1,"startColumn":1},{"endRow":127,"startRow":126,"endColumn":3,"startColumn":3},{"endRow":127,"startRow":126,"endColumn":4,"startColumn":4},{"endRow":129,"startRow":128,"endColumn":0,"startColumn":0},{"endRow":129,"startRow":128,"endColumn":1,"startColumn":1},{"endRow":129,"startRow":128,"endColumn":3,"startColumn":3},{"endRow":129,"startRow":128,"endColumn":4,"startColumn":4},{"endRow":131,"startRow":130,"endColumn":0,"startColumn":0},{"endRow":131,"startRow":130,"endColumn":1,"startColumn":1},{"endRow":131,"startRow":130,"endColumn":3,"startColumn":3},{"endRow":131,"startRow":130,"endColumn":4,"startColumn":4},{"endRow":133,"startRow":132,"endColumn":0,"startColumn":0},{"endRow":133,"startRow":132,"endColumn":1,"startColumn":1},{"endRow":133,"startRow":132,"endColumn":3,"startColumn":3},{"endRow":133,"startRow":132,"endColumn":4,"startColumn":4},{"endRow":135,"startRow":134,"endColumn":0,"startColumn":0},{"endRow":135,"startRow":134,"endColumn":1,"startColumn":1},{"endRow":135,"startRow":134,"endColumn":3,"startColumn":3},{"endRow":135,"startRow":134,"endColumn":4,"startColumn":4},{"endRow":137,"startRow":136,"endColumn":0,"startColumn":0},{"endRow":137,"startRow":136,"endColumn":1,"startColumn":1},{"endRow":137,"startRow":136,"endColumn":3,"startColumn":3},{"endRow":137,"startRow":136,"endColumn":4,"startColumn":4},{"endRow":139,"startRow":138,"endColumn":0,"startColumn":0},{"endRow":139,"startRow":138,"endColumn":1,"startColumn":1},{"endRow":139,"startRow":138,"endColumn":3,"startColumn":3},{"endRow":139,"startRow":138,"endColumn":4,"startColumn":4},{"endRow":141,"startRow":140,"endColumn":0,"startColumn":0},{"endRow":141,"startRow":140,"endColumn":1,"startColumn":1},{"endRow":141,"startRow":140,"endColumn":3,"startColumn":3},{"endRow":141,"startRow":140,"endColumn":4,"startColumn":4},{"endRow":143,"startRow":142,"endColumn":0,"startColumn":0},{"endRow":143,"startRow":142,"endColumn":1,"startColumn":1},{"endRow":143,"startRow":142,"endColumn":3,"startColumn":3},{"endRow":143,"startRow":142,"endColumn":4,"startColumn":4}],"rowHeader":{"width":46,"hidden":0},"scrollTop":200,"zoomRatio":1,"columnData":{"0":{"w":88},"1":{"w":167},"2":{"w":93},"3":{"w":88},"4":{"w":161},"5":{"w":99}},"scrollLeft":100,"rightToLeft":0,"columnHeader":{"height":20,"hidden":0},"showGridlines":1,"defaultRowHeight":24,"defaultColumnWidth":88,"cellData":{"0":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{"width":348,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":2,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"вторник          30. 07\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23,"paragraphStyle":{"horizontalAlign":2}}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          30. 07","t":1,"s":"nngjWc"},"1":{"s":"nngjWc"},"2":{"s":"nngjWc"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{"width":348,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":2,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"среда          31. 07\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21,"paragraphStyle":{"horizontalAlign":2}}]},"drawings":{},"drawingsOrder":[]},"v":"среда          31. 07","t":1,"s":"BbWjRT"},"4":{"s":"BbWjRT"},"5":{"s":"BbWjRT"},"6":{}},"1":{"0":{"v":"МГС","t":1,"s":"s0sBDr"},"1":{"v":"кострома- иваново","t":1,"s":"jr8Uf_"},"2":{"v":101,"t":2,"s":"Yg05-k"},"3":{"v":"МГС","t":1,"s":"zL3fJB"},"4":{"v":"севмаш","t":1,"s":"jr8Uf_"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" 121\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":121,"t":2,"s":"Yg05-k"}},"2":{"0":{"s":"s0sBDr"},"1":{"s":"jr8Uf_"},"2":{"v":"яковлев","t":1,"s":"j4Y0Ux"},"3":{"s":"zL3fJB"},"4":{"s":"jr8Uf_"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" неелов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":" неелов","t":1,"s":"VUUH_A"}},"3":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"балтика  ярославль","t":1,"s":"IRciPJ"},"2":{"v":69,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"балтика  СПБ","t":1,"s":"IRciPJ"},"5":{"v":806,"t":2,"s":"VUUH_A"}},"4":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"иванов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"бучков  дом \r\n","textRuns":[{"st":11,"ed":12,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":12,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":"бучков  дом ","t":1,"s":"VUUH_A"}},"5":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"ДРГБ  перев","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{"width":161,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":2,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" Эр ликид Зеленоград перенес эрликид на курск  01/08\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":52,"paragraphStyle":{"horizontalAlign":2}}]},"drawings":{},"drawingsOrder":[]},"v":" Эр ликид Зеленоград перенес эрликид на курск  01/08","t":1,"s":"IRciPJ"},"5":{"v":952,"t":2,"s":"VUUH_A"},"6":{"v":12,"t":2}},"6":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"михайлов","t":1,"s":"VUUH_A"}},"7":{"0":{"v":"ДРГБ инерт","t":1,"s":"iI-vIA"},"1":{"v":"деметра+дана","t":1,"s":"42YQXa"},"2":{"v":23,"t":2,"s":"j4Y0Ux"},"3":{"v":"ДРГ  инерт","t":1,"s":"tuoSZB"},"4":{"v":"малаховка  перенос! дост с 31 на 1","t":1,"s":"-G4yHe"},"5":{"v":23,"t":2,"s":"VUUH_A"}},"8":{"0":{"s":"iI-vIA"},"1":{"s":"42YQXa"},"2":{"v":"жарков","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"-G4yHe"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"жарков \r\n","textRuns":[{"st":6,"ed":7,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":"жарков ","t":1,"s":"VUUH_A"}},"9":{"0":{"v":"ДРГБ инерт","t":1,"s":"iJ7t0w"},"1":{"v":"тверьгазсервис","t":1,"s":"42YQXa"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{"width":93,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":1,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" сам\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4,"paragraphStyle":{"horizontalAlign":1}}]},"drawings":{},"drawingsOrder":[]},"v":" сам","t":1,"s":"j4Y0Ux"},"3":{"v":"ДРГБ  перев","t":1,"s":"tuoSZB"},"4":{"v":"айс  лайн МСК","t":1,"s":"IRciPJ"},"5":{"v":409,"t":2,"s":"VUUH_A"}},"10":{"0":{"s":"iJ7t0w"},"1":{"s":"42YQXa"},"2":{"v":"погодин","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"агафонов","t":1,"s":"VUUH_A"}},"11":{"0":{"v":" ","t":1,"s":"s0sBDr"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"-24B0b"},"3":{"v":"НМСК","t":1,"s":"tuoSZB"},"4":{"v":"сухой лёд","t":1,"s":"IRciPJ"},"5":{"v":963,"t":2,"s":"GMjeOw"}},"12":{"0":{"s":"s0sBDr"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"qKBjMP"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"хоменко","t":1,"s":"kLHBou"}},"13":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{"width":167,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":2,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":"криосфера \r\n","textRuns":[{"st":9,"ed":10,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10,"paragraphStyle":{"horizontalAlign":2}}]},"drawings":{},"drawingsOrder":[]},"v":"криосфера ","t":1,"s":"IRciPJ"},"2":{"v":667,"t":2,"s":"kLHBou"},"3":{"v":"МДЛ","t":1,"s":"tuoSZB"},"4":{"v":"криосфера сам","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"14":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"шарапов","t":1,"s":"kLHBou"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"перевезен","t":1,"s":"kLHBou"}},"15":{"0":{"v":"ПСК","t":1,"s":"_Pm9pi"},"1":{"v":"айс  лайн МСК","t":1,"s":"IRciPJ"},"2":{"v":409,"t":2,"s":"Yg05-k"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"Yg05-k"}},"16":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"агафонов","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"17":{"0":{"v":"АКР инерт","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"-24B0b"},"3":{"v":"АКР  перев","t":1,"s":"tuoSZB"},"4":{"v":"ТВСЗ","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{"width":99,"height":null},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":3,"centerAngle":0,"vertexAngle":0,"wrapStrategy":3}},"body":{"dataStream":" 031\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4,"paragraphStyle":{"horizontalAlign":0}}]},"drawings":{},"drawingsOrder":[]},"v":31,"t":2,"s":"GMjeOw"}},"18":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"qKBjMP"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"ковалёв","t":1,"s":"kLHBou"}},"19":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":"криопродукт","t":1,"s":"IRciPJ"},"2":{"v":314,"t":2,"s":"qKBjMP"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":"Б. З","t":1,"s":"IRciPJ"},"5":{"v":82,"t":2,"s":"kLHBou"}},"20":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"тим","t":1,"s":"j8f64e"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Мурихин","t":1,"s":"Yg05-k"}},"21":{"0":{"v":"АКР","t":1,"s":"O6hJoz"},"1":{"v":"  ","t":1,"s":"er-v9N"},"2":{"v":" ","t":1,"s":"-24B0b"},"3":{"v":" ","t":1,"s":"Lrabia"},"4":{"v":" ","t":1,"s":"er-v9N"},"5":{"v":" ","t":1,"s":"GMjeOw"}},"22":{"0":{"s":"O6hJoz"},"1":{"s":"er-v9N"},"2":{"v":" ","t":1,"s":"qKBjMP"},"3":{"s":"Lrabia"},"4":{"s":"er-v9N"},"5":{"v":" ","t":1,"s":"kLHBou"}},"23":{"0":{"v":" ","t":1,"s":"UgrKmv"},"1":{"v":" ","t":1,"s":"jr8Uf_"},"2":{"v":" ","t":1,"s":"qKBjMP"},"3":{"v":" ","t":1,"s":"ByLwy0"},"4":{"v":" ","t":1,"s":"l4wiJv"},"5":{"v":" ","t":1,"s":"kLHBou"}},"24":{"0":{"v":" ","t":1,"s":"vS0zRT"},"1":{"v":"  ","t":1,"s":"axtsR8"},"2":{"v":" ","t":1,"s":"l4wiJv"},"3":{"v":" ","t":1,"s":"axtsR8"},"4":{"v":" ","t":1,"s":"l4wiJv"},"5":{"v":" ","t":1,"s":"l4wiJv"}},"25":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          6. 08\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":22}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          6. 08","t":1,"s":"kKh0FJ"},"1":{"s":"kKh0FJ"},"2":{"s":"kKh0FJ"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          7. 08\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":20}]},"drawings":{},"drawingsOrder":[]},"v":"среда          7. 08","t":1,"s":"YXWmSD"},"4":{"s":"YXWmSD"},"5":{"s":"YXWmSD"}},"26":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Ярпож дост 07\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":14}]},"drawings":{},"drawingsOrder":[]},"v":" Ярпож дост 07","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 121\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":121,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"криотех  2т+ севмаш","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 314\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":314,"t":2,"s":"j4Y0Ux"}},"27":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" неёлов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7}]},"drawings":{},"drawingsOrder":[]},"v":" неёлов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Ковалев","t":1,"s":"VUUH_A"}},"28":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Криоген сервис Вологда\r\n","textRuns":[{"st":0,"ed":1,"ts":{"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":" Криоген сервис Вологда","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 069\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":69,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"Сясь  строй 16т","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 069\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":69,"t":2,"s":"VUUH_A"}},"29":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Иванов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7}]},"drawings":{},"drawingsOrder":[]},"v":" Иванов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Иванов дом\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":11}]},"drawings":{},"drawingsOrder":[]},"v":" Иванов дом","t":1,"s":"j4Y0Ux"}},"30":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"31":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"32":{"0":{"v":"ДРГБ инерт","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  малаховка !!! дост 07\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"  малаховка !!! дост 07","t":1,"s":"IRciPJ"},"2":{"v":82,"t":2,"s":"VUUH_A"},"3":{"v":"ДРГБ  перев","t":1,"s":"tuoSZB"},"4":{"v":"айс  лайн МСК","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 409\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":409,"t":2,"s":"j4Y0Ux"}},"33":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Мурихин","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Тимошкин\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" Тимошкин","t":1,"s":"VUUH_A"}},"34":{"0":{"v":"ДРГБ инерт","t":1,"s":"_Pm9pi"},"1":{"v":"Аливария","t":1,"s":"IRciPJ"},"2":{"v":23,"t":2,"s":"VUUH_A"},"3":{"v":"ДРГ  инерт","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"Афанасий \r\n","textRuns":[{"st":8,"ed":9,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":"Афанасий ","t":1,"s":"IRciPJ"},"5":{"v":952,"t":2,"s":"VUUH_A"}},"35":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Пачев","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"михайлов","t":1,"s":"VUUH_A"}},"36":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"37":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"38":{"0":{"v":"МДЛ","t":1,"s":"O6hJoz"},"1":{"v":"криосфера сам","t":1,"s":"er-v9N"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МДЛ","t":1,"s":"Lrabia"},"4":{"v":" ","t":1,"s":"er-v9N"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"39":{"0":{"s":"O6hJoz"},"1":{"s":"er-v9N"},"2":{"v":"перевезен","t":1,"s":"VUUH_A"},"3":{"s":"Lrabia"},"4":{"s":"er-v9N"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"40":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР \r\n","textRuns":[{"st":3,"ed":4,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":"АКР ","t":1,"s":"s0sBDr"},"1":{"v":" ","t":1,"s":"jr8Uf_"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"АКР инерт","t":1,"s":"zL3fJB"},"4":{"v":" ","t":1,"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"41":{"0":{"s":"s0sBDr"},"1":{"s":"jr8Uf_"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"zL3fJB"},"4":{"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"42":{"0":{"v":"АКР","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":"Балтика  спб","t":1,"s":"IRciPJ"},"5":{"v":101,"t":2,"s":"j4Y0Ux"}},"43":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Яковлев","t":1,"s":"j4Y0Ux"}},"44":{"0":{"v":"АКР инерт","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  Адмирал Верфи\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":15}]},"drawings":{},"drawingsOrder":[]},"v":"  Адмирал Верфи","t":1,"s":"IRciPJ"},"2":{"v":31,"t":2,"s":"j4Y0Ux"},"3":{"v":"АКР  перев","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"45":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"арт","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"46":{"0":{"v":"АКР инерт","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  ТИМ МЕН С Агафон\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":18}]},"drawings":{},"drawingsOrder":[]},"v":"  ТИМ МЕН С Агафон","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР","t":1,"s":"tuoSZB"},"4":{"v":"лоренс  кириши","t":1,"s":"IRciPJ"},"5":{"v":101,"t":2,"s":"j4Y0Ux"}},"47":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Яковлев","t":1,"s":"j4Y0Ux"}},"48":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"v":"ДОПОГ  3650, 0475,Ситрак , свифт","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"teWCYG"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" агафонов дом!!!!!!!!\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(255,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":" агафонов дом!!!!!!!!","t":1,"s":"rRHXCi"},"5":{"v":" ","t":1,"s":"teWCYG"}},"49":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          13. 08\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          13. 08","t":1,"s":"EfpNMr"},"1":{"s":"EfpNMr"},"2":{"s":"EfpNMr"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          14. 08\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":"среда          14. 08","t":1,"s":"yh_sE-"},"4":{"s":"yh_sE-"},"5":{"s":"yh_sE-"}},"50":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"Архангельск  Синара ?????","t":1,"s":"er-v9N"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 806\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":806,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"криотехнология  4т+ севмаш","t":1,"s":"er-v9N"},"5":{"v":31,"t":2,"s":"j4Y0Ux"}},"51":{"0":{"s":"_Pm9pi"},"1":{"s":"er-v9N"},"2":{"v":"григорьев","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"er-v9N"},"5":{"v":"арт","t":1,"s":"VUUH_A"}},"52":{"0":{"v":"МГС","t":1,"s":"cxzkeh"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  Адмирал верфи 13-14/08 ДОМ\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":28}]},"drawings":{},"drawingsOrder":[]},"v":"  Адмирал верфи 13-14/08 ДОМ","t":1,"s":"0WnwAs"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 314\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":314,"t":2,"s":"j4Y0Ux"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" мурманск\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" мурманск","t":1,"s":"_FEqKG"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" гончарук\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" гончарук","t":1,"s":"VUUH_A"}},"53":{"0":{"s":"cxzkeh"},"1":{"s":"0WnwAs"},"2":{"v":"Ковалев","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"_FEqKG"},"5":{"v":" ","t":1,"s":"GMjeOw"}},"54":{"0":{"v":" ","t":1,"s":"iI-vIA"},"1":{"v":" ","t":1,"s":"Uv_Oof"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"kLHBou"}},"55":{"0":{"s":"iI-vIA"},"1":{"s":"Uv_Oof"},"2":{"v":" ","t":1,"s":"GMjeOw"},"3":{"s":"tuoSZB"},"4":{"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"kLHBou"}},"56":{"0":{"v":"ДРГБ перев","t":1,"s":"s0sBDr"},"1":{"v":"айс лайн МСК","t":1,"s":"jr8Uf_"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 409\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":409,"t":2,"s":"qKBjMP"},"3":{"v":"ДРГ инерт","t":1,"s":"cxzkeh"},"4":{"v":"эр  ликид КМПЗ 16 дост через инерт","t":1,"s":"42YQXa"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 101 \r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":4,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":101,"t":2,"s":"kLHBou"}},"57":{"0":{"s":"s0sBDr"},"1":{"s":"jr8Uf_"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Тимошкин\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" Тимошкин","t":1,"s":"Yg05-k"},"3":{"s":"cxzkeh"},"4":{"s":"42YQXa"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Жарков\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7}]},"drawings":{},"drawingsOrder":[]},"v":" Жарков","t":1,"s":"j8f64e"}},"58":{"0":{"v":"ДРГБ  инерт","t":1,"s":"_Pm9pi"},"1":{"v":"сухой лед","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 101 \r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":4,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":101,"t":2,"s":"VUUH_A"},"3":{"v":"ДРГ инерт","t":1,"s":"cxzkeh"},"4":{"v":"сухой лед","t":1,"s":"42YQXa"},"5":{"v":23,"t":2,"s":"VUUH_A"}},"59":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Жарков\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":7}]},"drawings":{},"drawingsOrder":[]},"v":" Жарков","t":1,"s":"j4Y0Ux"},"3":{"s":"cxzkeh"},"4":{"s":"42YQXa"},"5":{"v":"Пачев","t":1,"s":"VUUH_A"}},"60":{"0":{"v":" ","t":1,"s":"O6hJoz"},"1":{"v":" ","t":1,"s":"er-v9N"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"iI-vIA"},"4":{"v":"лидер малаховка дост  14.08. 16-20 тн. отмена","t":1,"s":"tAvy1Y"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"61":{"0":{"s":"O6hJoz"},"1":{"s":"er-v9N"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"iI-vIA"},"4":{"s":"tAvy1Y"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"62":{"0":{"v":"МДЛ","t":1,"s":"s0sBDr"},"1":{"v":"криосфера сам","t":1,"s":"_FEqKG"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МДЛ","t":1,"s":"fjIvvJ"},"4":{"v":" ","t":1,"s":"P-90jh"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"63":{"0":{"s":"s0sBDr"},"1":{"s":"_FEqKG"},"2":{"v":"перевезен","t":1,"s":"VUUH_A"},"3":{"s":"fjIvvJ"},"4":{"s":"P-90jh"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"64":{"0":{"v":" ","t":1,"s":"FTYXhd"},"1":{"v":" ","t":1,"s":"0WnwAs"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"АКР перев","t":1,"s":"cxzkeh"},"4":{"v":"Айс Лайн","t":1,"s":"0WnwAs"},"5":{"v":314,"t":2,"s":"VUUH_A"}},"65":{"0":{"s":"FTYXhd"},"1":{"s":"0WnwAs"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"cxzkeh"},"4":{"s":"0WnwAs"},"5":{"v":7927,"t":2,"s":"VUUH_A"}},"66":{"0":{"v":"АКР перев +инерт","t":1,"s":"FTYXhd"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Техносвар 10т +  Кингисеп\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":16,"ed":18,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":26}]},"drawings":{},"drawingsOrder":[]},"v":" Техносвар 10т +  Кингисеп","t":1,"s":"42YQXa"},"2":{"v":"494 +2459","t":1,"s":"VUUH_A"},"3":{"v":"АКР инерт","t":1,"s":"tuoSZB"},"4":{"v":"БЗ!!","t":1,"s":"IRciPJ"},"5":{"v":"494 +2459","t":1,"s":"VUUH_A"}},"67":{"0":{"s":"FTYXhd"},"1":{"s":"42YQXa"},"2":{"v":"Шарапов","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Шарапов","t":1,"s":"VUUH_A"}},"68":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":963,"t":2,"s":"VUUH_A"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"69":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"конд \r\n","textRuns":[{"st":4,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":"конд ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"70":{"0":{"v":"АКР","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР","t":1,"s":"tuoSZB"},"4":{"v":"стоит  Химтеко","t":1,"s":"KUm7LV"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"71":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"KUm7LV"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"72":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  7553 ремонт\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":13}]},"drawings":{},"drawingsOrder":[]},"v":"  7553 ремонт","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"teWCYG"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"v":"14/08(НЕ  ПОЗЖЕ)смена ковалев-агафонов","t":1,"s":"rRHXCi"},"5":{"v":" ","t":1,"s":"teWCYG"}},"73":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          20. 08\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          20. 08","t":1,"s":"EfpNMr"},"1":{"s":"EfpNMr"},"2":{"s":"EfpNMr"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          21. 08\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":"среда          21. 08","t":1,"s":"yh_sE-"},"4":{"s":"yh_sE-"},"5":{"s":"yh_sE-"}},"74":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Архангельск Сатурн\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":19}]},"drawings":{},"drawingsOrder":[]},"v":" Архангельск Сатурн","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 952\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":952,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"севмаш  !!","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 101 \r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":4,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":101,"t":2,"s":"VUUH_A"}},"75":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"михайлов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  Жарков\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":8}]},"drawings":{},"drawingsOrder":[]},"v":"  Жарков","t":1,"s":"j4Y0Ux"}},"76":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"БЗ","t":1,"s":"IRciPJ"},"2":{"v":"494+2459","t":1,"s":"xG9tat"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" кострома +   иваново!!!!!+ остаток Кузнечиха\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}},{"st":11,"ed":14,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":45}]},"drawings":{},"drawingsOrder":[]},"v":" кострома +   иваново!!!!!+ остаток Кузнечиха","t":1,"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  963\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":5}]},"drawings":{},"drawingsOrder":[]},"v":963,"t":2,"s":"VUUH_A"}},"77":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Шарапов","t":1,"s":"xG9tat"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"кондрат","t":1,"s":"j4Y0Ux"}},"78":{"0":{"v":" ","t":1,"s":"FTYXhd"},"1":{"v":" ","t":1,"s":"42YQXa"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"79":{"0":{"s":"FTYXhd"},"1":{"s":"42YQXa"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"wpzXdZ"}},"80":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"er-v9N"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"ДРГБ  перев","t":1,"s":"tuoSZB"},"4":{"v":"айс  лайн МСК","t":1,"s":"IRciPJ"},"5":{"v":31,"t":2,"s":"j4Y0Ux"}},"81":{"0":{"s":"_Pm9pi"},"1":{"s":"er-v9N"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"артамонов","t":1,"s":"VUUH_A"}},"82":{"0":{"v":"ДРГБ инерт","t":1,"s":"cxzkeh"},"1":{"v":"Владимир !!!","t":1,"s":"0WnwAs"},"2":{"v":82,"t":2,"s":"j4Y0Ux"},"3":{"v":"ДРГ  инерт","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"альянс  крио 8-10 тонн подтв.!  + Афанасий 8 т\r\n","textRuns":[{"st":30,"ed":32,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":46}]},"drawings":{},"drawingsOrder":[]},"v":"альянс  крио 8-10 тонн подтв.!  + Афанасий 8 т","t":1,"s":"IRciPJ"},"5":{"v":314,"t":2,"s":"j4Y0Ux"}},"83":{"0":{"s":"cxzkeh"},"1":{"s":"0WnwAs"},"2":{"v":"Орлов","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Агафанов","t":1,"s":"VUUH_A"}},"84":{"0":{"v":" ","t":1,"s":"cxzkeh"},"1":{"v":"  ","t":1,"s":"42YQXa"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"031 арт то тверь  \r\n","textRuns":[{"st":16,"ed":18,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":18}]},"drawings":{},"drawingsOrder":[]},"v":"031 арт то тверь  ","t":1,"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"85":{"0":{"s":"cxzkeh"},"1":{"s":"42YQXa"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"86":{"0":{"v":"МДЛ","t":1,"s":"iI-vIA"},"1":{"v":"  ","t":1,"s":"Uv_Oof"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МДЛ","t":1,"s":"Lrabia"},"4":{"v":"перевезенцев","t":1,"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"87":{"0":{"s":"iI-vIA"},"1":{"s":"Uv_Oof"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"Lrabia"},"4":{"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"88":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР \r\n","textRuns":[{"st":3,"ed":4,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":"АКР ","t":1,"s":"0bAkDO"},"1":{"v":" ","t":1,"s":"0WnwAs"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"zL3fJB"},"4":{"v":"пром газ технология","t":1,"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"y2OD4R"}},"89":{"0":{"s":"0bAkDO"},"1":{"s":"0WnwAs"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"zL3fJB"},"4":{"s":"7JSR5j"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"90":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР \r\n","textRuns":[{"st":3,"ed":4,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":"АКР ","t":1,"s":"_Pm9pi"},"1":{"v":"Айс  Лайн","t":1,"s":"IRciPJ"},"2":{"v":409,"t":2,"s":"VUUH_A"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"Сегодня  погрузок нет\r\n","textRuns":[{"st":7,"ed":9,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":"Сегодня  погрузок нет","t":1,"s":"er-v9N"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"91":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"тимошкин","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"er-v9N"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"92":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":"ПУЗ  груз 409 перегр в хоменко","t":1,"s":"IRciPJ"},"2":{"v":"121+  новая","t":1,"s":"VUUH_A"},"3":{"v":"АКР  перев","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"93":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"хоменко","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"jr8Uf_"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"94":{"0":{"v":"АКР","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"95":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"-24B0b"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"96":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"v":"  ","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"D9frdN"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"v":" ","t":1,"s":"j4CHDO"},"5":{"v":" ","t":1,"s":"qnIi_R"}},"97":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          27. 08\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          27. 08","t":1,"s":"EfpNMr"},"1":{"s":"EfpNMr"},"2":{"s":"EfpNMr"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          28. 08\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":21}]},"drawings":{},"drawingsOrder":[]},"v":"среда          28. 08","t":1,"s":"yh_sE-"},"4":{"s":"yh_sE-"},"5":{"s":"yh_sE-"}},"98":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"из  графика","t":1,"s":"IRciPJ"},"2":{"v":409,"t":2,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  норд газ !!! + вилаш\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":22}]},"drawings":{},"drawingsOrder":[]},"v":"  норд газ !!! + вилаш","t":1,"s":"IRciPJ"},"5":{"v":"494+2459","t":1,"s":"xG9tat"}},"99":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Ковалев","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" хоменко\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":8}]},"drawings":{},"drawingsOrder":[]},"v":" хоменко","t":1,"s":"j4Y0Ux"}},"100":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":"мерс","t":1,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"ЯЗН  выгрузка 29/08\r\n","textRuns":[{"st":3,"ed":5,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":19}]},"drawings":{},"drawingsOrder":[]},"v":"ЯЗН  выгрузка 29/08","t":1,"s":"IRciPJ"},"5":{"v":952,"t":2,"s":"xG9tat"}},"101":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Гончарук","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"михайлов","t":1,"s":"xG9tat"}},"102":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"ДАНА  на 29 + сухой лед","t":1,"s":"IRciPJ"},"5":{"v":82,"t":2,"s":"VUUH_A"}},"103":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"орлов","t":1,"s":"VUUH_A"}},"104":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"МДЛ","t":1,"s":"tuoSZB"},"4":{"v":"деметра","t":1,"s":"7JSR5j"},"5":{"v":314,"t":2,"s":"hBZsKH"}},"105":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Кабанов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":8}]},"drawings":{},"drawingsOrder":[]},"v":" Кабанов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"7JSR5j"},"5":{"v":"Агафонов","t":1,"s":"y2OD4R"}},"106":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":23,"t":2,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"107":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Яковлев","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"GMjeOw"}},"108":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":"гос. номер а/м","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"109":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"110":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"111":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"kLHBou"}},"112":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР  инерт \r\n","textRuns":[{"st":10,"ed":11,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":11}]},"drawings":{},"drawingsOrder":[]},"v":"АКР  инерт ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":"сегодня 1- АМ","t":1,"s":"KUm7LV"},"5":{"v":" ","t":1,"s":"kLHBou"}},"113":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"KUm7LV"},"5":{"v":" ","t":1,"s":"kLHBou"}},"114":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР  инерт \r\n","textRuns":[{"st":10,"ed":11,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":11}]},"drawings":{},"drawingsOrder":[]},"v":"АКР  инерт ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":963,"t":2,"s":"xG9tat"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР перев \r\n","textRuns":[{"st":9,"ed":10,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10}]},"drawings":{},"drawingsOrder":[]},"v":"АКР перев ","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"1-  эр ликид зеленоград\r\n","textRuns":[{"st":2,"ed":4,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":23}]},"drawings":{},"drawingsOrder":[]},"v":"1-  эр ликид зеленоград","t":1,"s":"IRciPJ"},"5":{"v":963,"t":2,"s":"Ji5JWX"}},"115":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Неелов","t":1,"s":"xG9tat"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Неелов","t":1,"s":"Ji5JWX"}},"116":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":"из  графика","t":1,"s":"IRciPJ"},"2":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" 121 +7553\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10}]},"drawings":{},"drawingsOrder":[]},"v":" 121 +7553","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":31,"t":2,"s":"Yg05-k"}},"117":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":"Шарапов","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" артамонов\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10}]},"drawings":{},"drawingsOrder":[]},"v":" артамонов","t":1,"s":"VUUH_A"}},"118":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"АКР перев \r\n","textRuns":[{"st":9,"ed":10,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":10}]},"drawings":{},"drawingsOrder":[]},"v":"АКР перев ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":806,"t":2,"s":"VUUH_A"}},"119":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":"Бучков","t":1,"s":"GMjeOw"}},"120":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"v":" ","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"teWCYG"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"v":" ","t":1,"s":"teWCYG"},"5":{"v":" ","t":1,"s":"D9frdN"}},"121":{"0":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"вторник          3. 09\r\n","textRuns":[{"st":7,"ed":17,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":22}]},"drawings":{},"drawingsOrder":[]},"v":"вторник          3. 09","t":1,"s":"EfpNMr"},"1":{"s":"EfpNMr"},"2":{"s":"EfpNMr"},"3":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"среда          4. 09\r\n","textRuns":[{"st":5,"ed":15,"ts":{"fs":14,"bl":1,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":20}]},"drawings":{},"drawingsOrder":[]},"v":"среда          4. 09","t":1,"s":"yh_sE-"},"4":{"s":"yh_sE-"},"5":{"s":"yh_sE-"}},"122":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"v":"Азотно  кислородный(криоген ресурс) !!!","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"v":"севмаш","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"xG9tat"}},"123":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"xG9tat"}},"124":{"0":{"v":"МГС","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Кострома + Иваново!!!\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":22}]},"drawings":{},"drawingsOrder":[]},"v":" Кострома + Иваново!!!","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МГС","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" дом\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":4}]},"drawings":{},"drawingsOrder":[]},"v":" дом","t":1,"s":"IRciPJ"},"5":{"v":"494+2459","t":1,"s":"xG9tat"}},"125":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" хоменко\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":8}]},"drawings":{},"drawingsOrder":[]},"v":" хоменко","t":1,"s":"j4Y0Ux"}},"126":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"xG9tat"}},"127":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"128":{"0":{"v":"ПСК","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"НМСК","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"129":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"130":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"131":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"132":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"133":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"134":{"0":{"v":"МДЛ","t":1,"s":"_Pm9pi"},"1":{"v":"малаховка  лидер выгрузка 04/08","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":"МДЛ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"135":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"136":{"0":{"v":" ","t":1,"s":"_Pm9pi"},"1":{"v":" ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"v":" ","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"137":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"VUUH_A"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"138":{"0":{"v":"АКР инерт","t":1,"s":"_Pm9pi"},"1":{"v":"  ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР  инерт","t":1,"s":"tuoSZB"},"4":{"v":" ","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"139":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"140":{"0":{"v":"АКР перев","t":1,"s":"_Pm9pi"},"1":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":"  ТВСЗ+ ТХМ\r\n","textRuns":[{"st":0,"ed":2,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":11}]},"drawings":{},"drawingsOrder":[]},"v":"  ТВСЗ+ ТХМ","t":1,"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР  перев","t":1,"s":"tuoSZB"},"4":{"p":{"id":"d","documentStyle":{"pageSize":{},"marginTop":0,"marginBottom":2,"marginRight":2,"marginLeft":2,"renderConfig":{"horizontalAlign":0,"verticalAlign":0,"centerAngle":0,"vertexAngle":0,"wrapStrategy":0}},"body":{"dataStream":" Айс Лайн\r\n","textRuns":[{"st":0,"ed":1,"ts":{"cl":{"rgb":"rgb(0,0,0)"},"fs":14,"ff":"\"Times New Roman\""}}],"paragraphs":[{"startIndex":9}]},"drawings":{},"drawingsOrder":[]},"v":" Айс Лайн","t":1,"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"141":{"0":{"s":"_Pm9pi"},"1":{"s":"IRciPJ"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"tuoSZB"},"4":{"s":"IRciPJ"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"142":{"0":{"v":"АКР","t":1,"s":"cxzkeh"},"1":{"v":"  ","t":1,"s":"42YQXa"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"v":"АКР","t":1,"s":"cxzkeh"},"4":{"v":" ","t":1,"s":"42YQXa"},"5":{"v":" ","t":1,"s":"j4Y0Ux"}},"143":{"0":{"s":"cxzkeh"},"1":{"s":"42YQXa"},"2":{"v":" ","t":1,"s":"j4Y0Ux"},"3":{"s":"cxzkeh"},"4":{"s":"42YQXa"},"5":{"v":" ","t":1,"s":"VUUH_A"}},"144":{"0":{"v":" ","t":1,"s":"qnIi_R"},"1":{"v":"  ","t":1,"s":"teWCYG"},"2":{"v":" ","t":1,"s":"teWCYG"},"3":{"v":" ","t":1,"s":"teWCYG"},"4":{"v":"Хоменко-  кондратьев смена 4-5","t":1,"s":"teWCYG"},"5":{"v":" ","t":1,"s":"teWCYG"}}}
-//         }
-//     },
-//     "resources": [
-//         {
-//             "name": "SHEET_DEFINED_NAME_PLUGIN",
-//             "data": ""
-//         }
-//     ]
-// });
-
-// let listener = null;
-// listener = univerAPI.onCommandExecuted((command) => {
-//     console.log(command);
-//     // console.log(13);
-//     // console.log(wb);
-//     // eslint-disable-next-line no-console
-// });
-
+main()
 univerAPI.onCommandExecuted((command) => {
     // console.log(command);
     if(command.id === 'sheet.mutation.set-range-values' || command.id === 'sheet.mutation.add-worksheet-merge'){
         // console.log(command);
         if ((command.params.trigger)) {
-            console.log(command);
+            // console.log(command);
             updateDataInLaravel();
         }
     }
@@ -146,7 +19,7 @@ univerAPI.onCommandExecuted((command) => {
 
     if(command.id === 'sheet.operation.set-selections' && command.params.subUnitId === "Rnhp3bSJ-yZxQ5QyZT8LV" && command.params.type == 0) {
         if (command.params.selections[0]["primary"]["actualRow"] == 0 && command.params.selections[0]["primary"]["actualColumn"] == 0) {
-            console.log(command.params.selections[0]);
+            // console.log(command.params.selections[0]);
 
             const activeWorkbook = univerAPI.getActiveWorkbook()
             if (!activeWorkbook)
@@ -164,12 +37,12 @@ univerAPI.onCommandExecuted((command) => {
         }
 
         if (command.params.selections[0]["primary"]["actualColumn"] == 11) {
-            console.log(11);
+            console.log("pogruzka");
             sendPogruz(command.params.selections[0]["primary"]["actualRow"]);
         }
 
         if (command.params.selections[0]["primary"]["actualColumn"] == 12) {
-            console.log(12);
+            console.log("razgruzka");
             sendRazgruz(command.params.selections[0]["primary"]["actualRow"]);
         }
     }
@@ -186,46 +59,153 @@ function sendPogruz(row) {
 
     let tableData = JSON.parse(localStorage.getItem("tableData"));
 
-    const range = sheet4.getRange(row, 0, 1, 1);
+    const range = sheet4.getRange(row + 1, 0, 15, 13);
 
-    let supplier = range.getValue();
+    let values = range.getValues();
 
-    let groupedData = JSON.parse(localStorage.getItem("groupedData"));
+    const suppliersToSend = [];
 
-    const filteredData = groupedData.filter(item => item.supplierName === supplier);
+    for (const arr of values) {
+        if (arr.every(item => item === null)) {
+            break;
+        }
+        suppliersToSend.push({
+            code: arr[2],
+            carModel: arr[3],
+            carNumber: arr[4],
+            trailerModel: arr[5],
+            trailerNumber: arr[6],
+            tons: '',
+            driver: arr[8],
+            phone: arr[9],
+            payer: arr[10]
+        });
+    }
 
-    const suppliersToSend = filteredData.map(item => ({
-        code: item.code,
-        carModel: item.carModel,
-        carNumber: item.carNumber,
-        trailerModel: item.trailerModel || null,
-        trailerNumber: item.trailerNumber || null,
-        tons: item.tons || null,
-        driver: item.driver,
-        phone: item.phone,
-        payer: item.payer || null
-    }));
+    // console.log(suppliersToSend);
 
-    console.log(suppliersToSend);
 
-    // Отправка данных на сервер
-    fetch('/suppliers', {
+    // let supplier = range.getValue();
+
+    // console.log(supplier);
+
+    // let groupedData = JSON.parse(localStorage.getItem("groupedData"));
+    //
+    // const filteredData = groupedData.filter(item => item.supplierName === supplier);
+    //
+    // const suppliersToSend = filteredData.map(item => ({
+    //     code: item.code,
+    //     carModel: item.carModel,
+    //     carNumber: item.carNumber,
+    //     trailerModel: item.trailerModel || null,
+    //     trailerNumber: item.trailerNumber || null,
+    //     tons: item.tons || null,
+    //     driver: item.driver,
+    //     phone: item.phone,
+    //     payer: item.payer || null
+    // }));
+    //
+    // console.log(suppliersToSend);
+
+    // // Отправка данных на сервер
+    // fetch('/suppliers', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // В Laravel нужен CSRF токен
+    //     },
+    //     body: JSON.stringify({ suppliers: suppliersToSend }),
+    // })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log('Успех:', data);
+    //     })
+    //     .catch((error) => {
+    //         console.error('Ошибка:', error);
+    //     });
+
+    let searchdate = localStorage.getItem("searchdate");
+
+    const date = parseDateString(searchdate);
+
+    let subject = "Погрузка на " + formatDateToString(date);
+
+    sendEmail(suppliersToSend, subject);
+}
+
+async function sendEmail(suppliersToSend, subject) {
+
+    // Данные для черновика
+    const tableHtml = createTableHtml(suppliersToSend);
+
+    const draftData = {
+        to: 'gg-gg13@bk.ru',
+        subject: subject,
+        htmlTable: tableHtml,
+        message: 'С уважением',
+        from: 'gg-gg13@bk.ru'
+    };
+
+
+    fetch('/imap', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // В Laravel нужен CSRF токен
         },
-        body: JSON.stringify({ suppliers: suppliersToSend }),
+        body: JSON.stringify(draftData) // Преобразуем объект в JSON
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Успех:', data);
+            console.log('Успех:', data.message);
         })
-        .catch((error) => {
+        .catch(error => {
             console.error('Ошибка:', error);
         });
+
 }
 
+// Функция для создания HTML-кода таблицы
+function createTableHtml(suppliers) {
+    let tableHtml = `
+        <table cellpadding='6' border='1' style='border-collapse:collapse'>
+            <thead>
+                <tr>
+                    <th>КОД</th>
+                    <th>Марка а/м</th>
+                    <th>Гос. номер а/м</th>
+                    <th>Прицеп</th>
+                    <th>Гос. номер прицепа</th>
+                    <th>Тонн</th>
+                    <th>Водитель</th>
+                    <th>Телефон</th>
+                    <th>ПЛАТЕЛЬЩИК</th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+    suppliers.forEach(supplier => {
+        tableHtml += `
+                <tr>
+                    <td>${supplier.code}</td>
+                    <td>${supplier.carModel}</td>
+                    <td>${supplier.carNumber}</td>
+                    <td>${supplier.trailerModel}</td>
+                    <td>${supplier.trailerNumber}</td>
+                    <td>${supplier.tons}</td>
+                    <td>${supplier.driver}</td>
+                    <td>${supplier.phone}</td>
+                    <td>${supplier.payer}</td>
+                </tr>`;
+    });
+
+    tableHtml += `
+            </tbody>
+        </table>
+        <p>С уважением ...</p>`;
+
+    return tableHtml;
+}
 
 function sendRazgruz(row) {
     const activeWorkbook = univerAPI.getActiveWorkbook()
@@ -238,12 +218,62 @@ function sendRazgruz(row) {
 
     let tableData = JSON.parse(localStorage.getItem("tableData"));
 
-    const range = sheet4.getRange(row, 0, 1, 1);
+    const range = sheet4.getRange(row, 0, 1, 13);
 
-    let supplier = range.getValue();
+    let values = range.getValues();
 
-    console.log(supplier);
+    const suppliersToSend = [];
+
+    for (const arr of values) {
+        if (arr.every(item => item === null)) {
+            break;
+        }
+        suppliersToSend.push({
+            code: arr[2],
+            carModel: arr[3],
+            carNumber: arr[4],
+            trailerModel: arr[5],
+            trailerNumber: arr[6],
+            tons: '',
+            driver: arr[8],
+            phone: arr[9],
+            payer: arr[10]
+        });
+    }
+
+    let searchdate = localStorage.getItem("searchdate");
+
+    const date = parseDateString(searchdate);
+
+    // Создание даты на следующий день
+    const nextDay = new Date(date);
+    nextDay.setDate(date.getDate() + 1);
+
+    let subject = "Разгрузка на " + formatDateToString(date) + " - " + formatDateToString(nextDay);
+
+    sendEmail(suppliersToSend, subject);
 }
+
+function parseDateString(dateString) {
+    // Разделение строки на день и месяц
+    const [day, month] = dateString.split('.').map(part => part.trim());
+
+    // Текущий год
+    const currentYear = new Date().getFullYear();
+
+    // Создание объекта даты
+    const date = new Date(currentYear, month - 1, day);
+
+    return date;
+}
+
+function formatDateToString(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+}
+
 
 function setRangeTable() {
     const activeWorkbook = univerAPI.getActiveWorkbook()
@@ -258,154 +288,29 @@ function setRangeTable() {
 
     console.log(tableData);
 
-    const range = sheet4.getRange(2, 0, 15, 10);
+    const range = sheet4.getRange(1, 0, 150, 13);
     // range.setValues(0);
-    range.setValue("");
+    range.setValue({v: null, s: null});
     range.setValues(tableData);
 
-    const sheet5 = activeWorkbook.getSheetByName("Sheet5");
-
-    let templateRange = sheet5.getRange(0, 0, 6, 12);
-    let templateStyle = templateRange.getCellStyleData();
-    console.log(templateStyle);
-    console.log(templateRange.getValues());
+    // const sheet5 = activeWorkbook.getSheetByName("Sheet5");
+    //
+    // let templateRange = sheet5.getRange(0, 0, 6, 12);
+    // let templateStyle = templateRange.getCellStyleData();
+    // console.log(templateStyle);
+    // console.log(templateRange.getValues());
     // range.setValues(templateRange.getValues());
-
-
 }
-
-function isEmpty(obj) {
-    return Object.keys(obj).length === 0;
-}
-
-// document.getElementById("b2").addEventListener("click", function () {
-//     // const activeWorkbook = univerAPI.getActiveWorkbook();
-//     // const activeSheet = activeWorkbook.getActiveSheet();
-//     // // console.log(activeSheet);
-//     // const snapshot = activeWorkbook.save()
-//     // const sheet1 = Object.values(snapshot.sheets).find((sheet) => {
-//     //     return sheet.name === 'Sheet1'
-//     // })
-//     //
-//     // if (!sheet1)
-//     //     throw new Error('sheet1 is not defined')
-//
-//     // fetchGetWb(1);
-//
-//    // console.log(univerAPI.getHooks());
-//
-//     // eslint-disable-next-line no-console
-//     // console.log(JSON.stringify(sheet1, null, 2))
-//
-//     setRangeTable();
-//
-//
-// });
-
-async function fetchGetWb(unit_id) {
-    fetch(`/get/schedules/XSJ0hYXgSwWy2u24ql2sfw`, {
-        method: 'POST', // Используем метод PUT для обновления данных
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // В Laravel нужен CSRF токен
-        },
-        body: JSON.stringify({
-        })
-    })
-        .then(response => response.json())
-        .then(data => {
-            let snapshot = JSON.parse(data.wb.snapshot);
-            console.log(snapshot);
-            wb = univer.createUnit(UniverInstanceType.UNIVER_SHEET, snapshot);
-
-
-            const sheet1 = Object.values(snapshot.sheets).find((sheet) => {
-                return sheet.name === 'Sheet1'
-            })
-
-            const sheet2 = Object.values(snapshot.sheets).find((sheet) => {
-                return sheet.name === 'Sheet2'
-            })
-
-            const sheet3 = Object.values(snapshot.sheets).find((sheet) => {
-                return sheet.name === 'Sheet3'
-            })
-
-            if (!sheet1)
-                throw new Error('sheet1 is not defined')
-
-            // eslint-disable-next-line no-alert
-            // alert(JSON.stringify(sheet1, null, 2))
-            // eslint-disable-next-line no-console
-            // console.log(JSON.stringify(sheet1, null, 2))
-
-            // console.log(JSON.stringify(sheet1));
-            // console.log(JSON.stringify(snapshot));
-
-            localStorage.setItem('cellData', JSON.stringify(sheet1['cellData'], null, 2));
-            localStorage.setItem('drivers', JSON.stringify(sheet3['cellData'], null, 2));
-            localStorage.setItem('spisok', JSON.stringify(sheet2['cellData'], null, 2));
-
-
-            // for (const [key, value] of Object.entries(data.cells)) {
-            //     // console.log(activeSheet.getRange(value.row, value.column));
-            //     let cell = activeSheet.getRange(Number(value.row), Number(value.column));
-            //     console.log(cell);
-            //     cell.setValue(value.value);
-            // }
-            // data.cells.forEach((element) => {
-            //     console.log(element);
-            //     console.log(activeSheet.getRange(element.row, element.column));
-            //     activeSheet.getRange(element.row, element.column).setValue(element.value);
-            // })
-
-        })
-        .catch(error => {
-            console.error('Error updating data:', error);
-        });
-}
-
-document.addEventListener("DOMContentLoaded", function()
-{
-    fetchGetWb(1);
-});
 
 function searchByDate(date) {
-    // Заданная дата для поиска
-    console.log(1);
+    // const searchDate = "6. 08";
+    const searchDate = normalizeDate(date).toString();
 
-    // const searchDate = "31. 07";
-    const searchDate = date;
-
-
-// const rows = Object.entries(data);
-//
-// // Используем метод find для поиска строки, содержащей искомую дату
-// const foundRow = rows.find(([rowKey, rowValue]) => {
-//     return Object.values(rowValue).some(colValue =>
-//         colValue.v && typeof colValue.v === 'string' && colValue.v.includes(searchDate)
-//     );
-// });
-//
-// // Обработка найденной строки
-// if (foundRow) {
-//     const [rowKey, rowValue] = foundRow;
-//     console.log(`Дата '${searchDate}' найдена в строке ${rowKey}`);
-//
-//     // Дополнительная обработка найденной строки
-//     Object.entries(rowValue).forEach(([colKey, colValue]) => {
-//         // Проверяем, существует ли colValue.v и является ли он строкой
-//         if (colValue.v && typeof colValue.v === 'string' && colValue.v.includes(searchDate)) {
-//             console.log(`Столбец ${colKey}: ${colValue.v}`);
-//         }
-//     });
-// } else {
-//     console.log(`Дата '${searchDate}' не найдена в таблице.`);
-// }
+    localStorage.setItem("searchdate", searchDate);
+    // console.log(searchDate === "6. 08", typeof(searchDate));
+    // console.log(searchDate);
 
     let data = JSON.parse(localStorage.getItem("cellData"));
-    let driverData = JSON.parse(localStorage.getItem("drivers"));
-    let spisok = JSON.parse(localStorage.getItem("spisok"));
 
 // Флаг для проверки, найдена ли дата
     let dateFound = false;
@@ -419,7 +324,8 @@ function searchByDate(date) {
             // console.log(colKey);
             const colValue = rowValue[colKey];
             // Проверяем, есть ли значение и содержит ли оно искомую дату
-            if (colValue.v && typeof colValue.v === 'string') {
+            if (colValue.v && typeof colValue.v === 'string' && colValue.v.trim() !== "") {
+                // console.log(colValue.v, colValue.v.includes(searchDate));
                 if (colValue.v.includes(searchDate)) {
                     for (let i = parseInt(rowKey); i <= parseInt(rowKey) + 20; i+=2)
                     {
@@ -428,14 +334,23 @@ function searchByDate(date) {
                         const transKey = transParts[0]; // Основное значение trans
                         const dopValue = transParts.slice(1).join(' '); // Дополнительное слово
 
+                    //     console.log(info,(
+                    //         (info.vod !== "" && info.vod !== null) ||
+                    //         (info.nomer !== "" && info.nomer !== null) ||
+                    //         (info.trans !== "" && info.trans !== null) ||
+                    //         (info.info !== "" && info.info !== null)
+                    // ));
+
                         // Добавляем поле dop в объект info
                         info.dop = dopValue.trim() || null; // Если дополнительное слово пустое, устанавливаем в null
 
+                        info.payeer = getPayeer(info, transKey);
+
                         if (
-                            !(info.vod === "" || info.vod === null) &&
-                            !(info.nomer === "" || info.nomer === null) &&
-                            !(info.trans === "" || info.trans === null) &&
-                            !(info.info === "" || info.info === null)
+                            (info.vod !== "" && info.vod !== null) ||
+                            (info.nomer !== "" && info.nomer !== null) ||
+                            (info.trans !== "" && info.trans !== null) ||
+                            (info.info !== "" && info.info !== null)
                         )
                         {
                             // Если ключ trans еще не существует в groupedData, создаем новый массив
@@ -446,16 +361,6 @@ function searchByDate(date) {
                             // Добавляем информацию в соответствующий массив
                             groupedData[transKey].push(info);
                         }
-
-
-
-
-
-                        // let foundArr = [];
-                        // console.log(colKey);
-                        // foundData.push(getInfo(i, colKey));
-                        // foundArr[colValue.v] = {trans, info, nomer, vod};
-                        // foundData.push({trans, info, nomer, vod});
                     }
                     console.log(`Дата '${searchDate}' найдена в строке ${rowKey}, столбце ${colKey}: ${colValue.v}`);
                     dateFound = true;
@@ -475,7 +380,82 @@ function searchByDate(date) {
         console.log(`Дата '${searchDate}' не найдена в таблице.`);
     }
 
+    transormData(groupedData);
 
+}
+
+function getPayeer(info, transKey) {
+    let payeer = null;
+
+    switch(transKey) {
+        case 'АКР':
+            switch (info.dop) {
+                case 'инерт':
+                    payeer = "ООО Инерт СТ";
+                    break;
+                case 'перев':
+                    if (info.info.toLowerCase().includes("крио")) {
+                        payeer = "ООО Криопродукт";
+                    }
+
+                    if (info.info.toLowerCase().includes("техносвар")) {
+                        payeer = "ООО Техносвар";
+                    }
+                    break;
+            }
+            break;
+        case 'ДРГБ':
+        case 'ДРГ':
+            switch (info.dop) {
+                case 'инерт':
+                    payeer = "ООО Инерт СТ";
+                    break;
+                case 'перев':
+                    if (info.info.toLowerCase().includes("айс")) {
+                        payeer = "ООО Айс Лайн";
+                    }
+
+                    if (info.info.toLowerCase().includes("ликид")) {
+                        payeer = "ООО Эр Ликид";
+                    }
+                    break;
+                default:
+                    payeer = "ООО Инерт СТ";
+                    break;
+            }
+            break;
+        case 'НМСК':
+        case 'ПСК':
+        case 'МГС':
+        case 'МДЛ':
+            payeer = "ООО Инерт СТ";
+            break;
+    }
+
+    return payeer;
+    // let payeers = JSON.parse(localStorage.getItem("payeers"));
+    //
+    // console.log(payeers);
+
+    // for (const row of Object.values(payeers)) {
+    //     if (row[0]) {
+    //         const driverShortName = normalizeString(row[0].v); // Нормализуем сокращенное имя водителя
+    //         const driverFullName = row[1].v; // Полное имя водителя
+    //         const driverPhone = row[3] ? row[3].v : null; // Телефон водителя (если существует)
+    //         // Проверяем, содержит ли сокращенное имя водителя хотя бы одно слово из shortName
+    //         const anyWordMatch = shortNameWords.some(word => driverShortName.includes(word));
+    //
+    //         if (anyWordMatch) {
+    //             return { fullName: driverFullName, phone: driverPhone }; // Возвращаем полное имя и телефон
+    //         }
+    //     }
+    // }
+    // return { fullName: shortName, phone: null }; // Если не найдено
+
+    console.log(info);
+}
+
+function transormData(groupedData) {
     const tableData = [];
 
 // Проходим по каждому поставщику в groupedData
@@ -497,7 +477,7 @@ function searchByDate(date) {
                 tons: null, // Тонн (если есть, добавьте логику)
                 driver: record.fullName, // Водитель
                 phone: record.phone, // Телефон
-                payer: null // ПЛАТЕЛЬЩИК (если есть, добавьте логику)
+                payeer: record.payeer // ПЛАТЕЛЬЩИК (если есть, добавьте логику)
             };
 
             // Добавляем строку в массив таблицы
@@ -507,56 +487,193 @@ function searchByDate(date) {
 
     console.log(tableData);
 
-// // Преобразуем в нужный формат
-//     const transformedData = {};
-//     tableData.forEach((row, index) => {
-//         transformedData[index] = {
-//             0: { v: row.supplierName },
-//             1: { v: row.dop },
-//             2: { v: row.code },
-//             // 3: { v: row.info },
-//             3: { v: row.carNumber },
-//             4: { v: row.trailerModel },
-//             5: { v: row.trailerNumber },
-//             6: { v: row.tons },
-//             7: { v: row.driver },
-//             8: { v: row.phone },
-//             9: { v: row.payer }
-//         };
-//     });
-
-
     const transformedData = {};
     let index = 2;
 
-    // transformedData[1] = {
-    //     2: { v: "Код" },
-    //     3: { v: "Модель авто" },
-    //     4: { v: "Номер авто" },
-    //     5: { v: "Модель прицепа" },
-    //     6: { v: "Номер прицепа" },
-    //     7: { v: "Тонны" },
-    //     8: { v: "Водитель" },
-    //     9: { v: "Телефон" },
-    //     10: { v: "Плательщик" }
-    // };
+    let previousSupplierName = tableData[0].supplierName;
 
+    let style = {
+        "bd": {
+            "b": {
+                "s": 1,
+                "cl": {
+                    "rgb": "windowtext"
+                }
+            },
+            "l": {
+                "s": 1,
+                "cl": {
+                    "rgb": "windowtext"
+                }
+            },
+            "r": {
+                "s": 1,
+                "cl": {
+                    "rgb": "windowtext"
+                }
+            },
+            "t": {
+                "s": 1,
+                "cl": {
+                    "rgb": "windowtext"
+                }
+            }
+        },
+        "bg": null,
+        "bl": 0,
+        "cl": {
+            "rgb": "rgb(0,0,0)"
+        },
+        "ff": "Times New Roman",
+        "fs": 12,
+        "ht": 2,
+        "it": 0,
+        "ol": {
+            "s": 0,
+            "cl": {
+                "rgb": "rgb(0,0,0)"
+            }
+        },
+        "pd": {
+            "b": 5,
+            "l": 2,
+            "r": 2,
+            "t": 5
+        },
+        "st": {
+            "s": 0,
+            "cl": {
+                "rgb": "rgb(0,0,0)"
+            }
+        },
+        "tb": 3,
+        "td": 0,
+        "tr": {
+            "a": 0,
+            "v": 0
+        },
+        "ul": {
+            "s": 0,
+            "cl": {
+                "rgb": "rgb(0,0,0)"
+            }
+        },
+        "vt": 3
+    };
+
+    let yellowBgStyle = {
+        "bd": {
+            "b": {
+                "s": 1,
+                "cl": {
+                    "rgb": "windowtext"
+                }
+            },
+            "l": {
+                "s": 1,
+                "cl": {
+                    "rgb": "windowtext"
+                }
+            },
+            "r": {
+                "s": 1,
+                "cl": {
+                    "rgb": "windowtext"
+                }
+            },
+            "t": {
+                "s": 1,
+                "cl": {
+                    "rgb": "windowtext"
+                }
+            }
+        },
+        "bg": {
+            "rgb": "rgb(255,255,0)"
+        },
+        "bl": 0,
+        "cl": {
+            "rgb": "rgb(0,0,0)"
+        },
+        "ff": "Times New Roman",
+        "fs": 12,
+        "ht": 2,
+        "it": 0,
+        "ol": {
+            "s": 0,
+            "cl": {
+                "rgb": "rgb(0,0,0)"
+            }
+        },
+        "pd": {
+            "b": 2,
+            "l": 2,
+            "r": 2,
+            "t": 15
+        },
+        "st": {
+            "s": 0,
+            "cl": {
+                "rgb": "rgb(0,0,0)"
+            }
+        },
+        "tb": 3,
+        "td": 0,
+        "tr": {
+            "a": 0,
+            "v": 0
+        },
+        "ul": {
+            "s": 0,
+            "cl": {
+                "rgb": "rgb(0,0,0)"
+            }
+        },
+        "vt": 3
+    };
+
+
+    let firstStr = {
+        0: {s: style },
+        1: {v: "доп.", s: style },
+        2: { v: "КОД", s: yellowBgStyle },
+        3: { v: "марка а/м", s: style },
+        4: { v: "гос. номер а/м", s: style },
+        5: { v: "прицеп", s: style },
+        6: { v: "гос. номер прицепа", s: style },
+        7: { v: "тонн", s: style },
+        8: { v: "водитель", s: style },
+        9: { v: "телефон", s: style },
+        10: { v: "ПЛАТЕЛЬЩИК", s: style },
+        11: { v: "кнопка сформировать черновик и подвесить в  электронной почте", s: style },
+        12: { s: style }
+    };
+
+    transformedData[1] = firstStr;
 
     tableData.forEach((row) => {
+        if (row.supplierName !== previousSupplierName && index !== 2) {
+            index += 3;
+            previousSupplierName = row.supplierName;
+            transformedData[index] = firstStr;
+            index++
+        }
 
-            transformedData[index] = {
-                0: { v: row.supplierName },
-                1: { v: row.dop },
-                2: { v: row.code },
-                3: { v: row.carModel },
-                4: { v: row.carNumber },
-                5: { v: row.trailerModel },
-                6: { v: row.trailerNumber },
-                7: { v: row.tons },
-                8: { v: row.driver },
-                9: { v: row.phone },
-                10: { v: row.payer }
-            };
+        transformedData[index] = {
+            0: { v: row.supplierName, s: style },
+            1: { v: row.dop, s: style },
+            2: { v: row.code, s: style },
+            3: { v: row.carModel, s: style },
+            4: { v: row.carNumber, s: style },
+            5: { v: row.trailerModel, s: style },
+            6: { v: row.trailerNumber, s: style },
+            7: { v: row.tons, s: style },
+            8: { v: row.driver, s: style },
+            9: { v: row.phone, s: style },
+            10: { v: row.payeer, s: style },
+            11: {s: style },
+            12: {v: "для разгрузки", s: style },
+        };
         index++;
     });
 
@@ -564,33 +681,10 @@ function searchByDate(date) {
     console.log(transformedData);
 
 
-    // console.log(groupedData.entries);
     // Сохраняем данные в localStorage
     localStorage.setItem('tableData', JSON.stringify(transformedData));
     localStorage.setItem('groupedData', JSON.stringify(tableData));
-    // Перенаправляем на другую страницу
-    // window.location.href = 'v.html';
-
-// console.log(data);
 }
-
-// document.getElementById("b1").addEventListener("click", function () {
-//
-//     // const sheet1 = Object.values(snapshot.sheets).find((sheet) => {
-//     //     return sheet.name === 'Sheet1'
-//     // })
-//     //
-//     // if (!sheet1)
-//     //     throw new Error('sheet1 is not defined')
-//
-//     // eslint-disable-next-line no-console
-//     // console.log(JSON.stringify(sheet1, null, 2))
-//
-//     // updateDataInLaravel();
-//
-//     searchByDate(1);
-// });
-
 
 function getInfo(rowKey, colKey) {
     rowKey = parseInt(rowKey);
@@ -606,11 +700,6 @@ function getInfo(rowKey, colKey) {
     info = typeof info === 'string' ? info.trim() : info;
     nomer = typeof nomer === 'string' ? nomer.trim() : nomer;
     vod = typeof vod === 'string' ? vod.trim() : vod;
-
-    // let trans = data.cellValue[parseInt(rowKey) + 1][parseInt(colKey)]["v"];
-    // let info = data.cellValue[parseInt(rowKey) + 1][parseInt(colKey) + 1]["v"];
-    // let nomer = data.cellValue[parseInt(rowKey) + 1][parseInt(colKey) + 2]["v"];
-    // let vod = data.cellValue[parseInt(rowKey) + 2][parseInt(colKey) + 2]["v"];
 
     let {fullName, phone} = getFullDriverName(vod);
 
@@ -630,7 +719,11 @@ function getInfo(rowKey, colKey) {
 }
 
 function normalizeString(str) {
-    return str.replace(/ё/g, 'е').toLowerCase().trim(); // Заменяем ё на е и приводим к нижнему регистру
+    return str.toString().replace(/ё/g, 'е').toLowerCase().trim(); // Заменяем ё на е и приводим к нижнему регистру
+}
+
+function normalizeDate(dateStr) {
+    return dateStr.replace(/^0+/, '');
 }
 
 function getFullDriverName(shortName) {
@@ -653,7 +746,7 @@ function getFullDriverName(shortName) {
             }
         }
     }
-    return { fullName: null, phone: null }; // Если не найдено
+    return { fullName: shortName, phone: null }; // Если не найдено
 }
 
 function getCarInfo(carCode) {
@@ -682,76 +775,10 @@ function getCellData(rowKey, colKey) {
     }
 }
 
-
-// univerAPI.getUniverSheet(1).on('cellEdited', (cellInfo) => {
-//     console.log(cellInfo);
-//     // Получаем измененные данные
-//     const updatedValue = cellInfo.newValue;
-//     const row = cellInfo.row;
-//     const column = cellInfo.column;
-//
-//     // Логика обновления данных для отправки
-//     const updatedData = {
-//         id: data[row].id, // ID записи в базе данных
-//         field: column,     // Имя поля
-//         value: updatedValue // Новое значение
-//     };
-//
-//     // Отправляем данные на сервер
-//     updateDataInLaravel(updatedData);
-// });
-
-function getDataLaravel(sheet) {
-    fetch(`/get/schedules/${sheet.name}`, {
-        method: 'POST', // Используем метод PUT для обновления данных
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // В Laravel нужен CSRF токен
-        },
-        body: JSON.stringify({
-            cellData: sheet.cellData,
-        })
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Getted data:', data);
-
-        })
-        .catch(error => {
-            console.error('Error updating data:', error);
-        });
-}
-// function updateDataInLaravel(updatedData) {
-//     console.log(updatedData);
-//
-//     fetch(`/schedules/${updatedData.name}`, {
-//         method: 'POST', // Используем метод PUT для обновления данных
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // В Laravel нужен CSRF токен
-//         },
-//         body: JSON.stringify({
-//             cellData: updatedData.cellData,
-//         })
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log('Data updated successfully:', data);
-//         })
-//         .catch(error => {
-//             console.error('Error updating data:', error);
-//         });
-// }
-
 function updateDataInLaravel() {
 
     const activeWorkbook = univerAPI.getActiveWorkbook();
-    // const activeSheet = activeWorkbook.getActiveSheet();
-    // console.log(activeSheet);
     const snapshot = activeWorkbook.save()
-
-    // console.log(snapshot);
-
 
     fetch(`/schedules/${snapshot.id}`, {
         method: 'POST', // Используем метод PUT для обновления данных
@@ -772,18 +799,3 @@ function updateDataInLaravel() {
             console.error('Error updating data:', error);
         });
 }
-
-
-// import { setupUniver } from './setup-univer'
-// // import { setupToolbar } from './setup-toolbar'
-//
-// function main() {
-//     const univerAPI = setupUniver()
-//
-//     // test on dev
-//     window.univerAPI = univerAPI
-//
-//     // setupToolbar(univerAPI)
-// }
-//
-// main()
